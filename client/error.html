@@ -1,0 +1,21 @@
+<template name="error">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1>{{error}}</h1>
+        <h2>{{message}}</h2>
+        <p>{{details}}</p>
+        <div>
+          {{#linkTo route="home" class="btn btn-lg btn-primary"}}
+            <span class="glyphicon glyphicon-home"></span>
+            Home
+          {{/linkTo}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="notFound">
+  {{>error error="Error 404" message="Page not found" details="The page you requested does not exist."}}
+</template>
