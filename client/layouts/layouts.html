@@ -5,8 +5,8 @@
     </div>
     <div class="list-group">
       {{#each layouts}}
-        <a href="{{pathFor route="designer.open"}}" class="list-group-item">
-          Created by: {{creator}}, Created at: {{formatDate createdAt}}, Number of buildings: {{objects.length}}
+        <a href="{{pathFor route="designer"}}" class="list-group-item">
+          Number of buildings: {{objects.length}}, Created at: {{formatDate createdAt}}, Created by: {{creator}}
           <span class="pull-right">
             <button class="btn btn-xs btn-danger" title="Delete">
               <span class="glyphicon glyphicon-trash"></span>

@@ -3,35 +3,39 @@
     <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">AnnoDesigner</a>
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
       </div>
-        <div class="collapse navbar-collapse" id="navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="{{isActiveRoute "home"}}">{{#linkTo route="home"}}Home{{/linkTo}}</li>
-            <li class="{{isActiveRoute "layouts"}}">{{#linkTo route="layouts"}}Layouts{{/linkTo}}</li>
-            <li class="{{isActiveRoute "designer"}}">{{#linkTo route="designer"}}Designer{{/linkTo}}</li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contribute <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">I can code! (Link to github)</a></li>
-                <li><a href="#">The colors look awful! (Link to color schemes)</a></li>
-                <li><a href="#">Thinktank (Link to a page with suggestions/ideas and a voting system)</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Shut up and take my money! (Donate button)</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Wtf did this? (About page, i.e. Impressum/Contributors/etc.)</a></li>
-              </ul>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            {{> loginButtons}}
-          </ul>
-        </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="{{isActiveRoute "home"}}">{{#linkTo route="home"}}Home{{/linkTo}}</li>
+          <li class="{{isActiveRoute "layouts"}}">{{#linkTo route="layouts"}}Layouts{{/linkTo}}</li>
+          <li class="{{isActiveRoute "designer"}}">{{#linkTo route="designer.open"}}Designer{{/linkTo}}</li>
+          <!--<li class="dropdown">-->
+            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"-->
+               <!--aria-expanded="false">Contribute <span class="caret"></span></a>-->
+            <!--<ul class="dropdown-menu">-->
+              <!--<li class="dropdown-header">Hold my drink, I know stuff</li>-->
+              <!--<li><a href="#">Bug report (Link to github issues)</a></li>-->
+              <!--<li><a href="#">Source (Link to github)</a></li>-->
+              <!--<li><a href="#">Color schemes (Link to color schemes)</a></li>-->
+              <!--&lt;!&ndash;<li><a href="#">Suggestions and ideas (Link to a page with suggestions/ideas and a voting system)</a></li>&ndash;&gt;-->
+              <!--<li role="separator" class="divider"></li>-->
+              <!--<li class="dropdown-header">.. or maybe not, but I still want to help</li>-->
+              <!--<li><a href="#">Shut up and take my money!</a></li>-->
+              <!--<li role="separator" class="divider"></li>-->
+              <!--<li><a href="#">Wtf is this? (About page)</a></li>-->
+            <!--</ul>-->
+          <!--</li>-->
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {{>loginButtons}}
+        </ul>
+      </div>
     </div>
   </nav>
 </template>

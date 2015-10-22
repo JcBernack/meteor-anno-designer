@@ -7,39 +7,12 @@ Meteor.startup(function () {
   });
 });
 
-function newLayout() {
-  var layoutId = Layouts.insert({
-    creator: Meteor.userId(),
-    createdAt: new Date(),
-    objects: []
-  });
-  Session.set("designer.layoutId", layoutId);
-  console.log("new layout: " + layoutId);
-}
-
-Template.designer.onCreated(function () {
-  this.subscribe("layouts", function() {
-    var layout = Layouts.findOne(Session.get("designer.layoutId"));
-    if (!layout){
-      layout = Layouts.findOne({ creator: Meteor.userId() }, { sort: { createdAt: -1 }, limit: 1 });
-    }
-    if (layout) {
-      Session.set("designer.layoutId", layout._id);
-    } else {
-      newLayout();
-    }
-  });
-});
-
 Template.designerSurface.helpers({
   gridSize: function () {
     return Session.get("designer.gridSize");
   },
   gridFactor: function () {
     return Session.get("designer.gridFactor");
-  },
-  layout: function () {
-    return Layouts.findOne(Session.get("designer.layoutId"));
   },
   placementActive: function () {
     return Session.get("designer.placementActive");
@@ -76,7 +49,7 @@ Template.designerSurface.events({
   },
   "click svg": function (event) {
     if (Session.equals("designer.placementActive", false)) return;
-    Layouts.update(Session.get("designer.layoutId"), { $push: { objects: Session.get("designer.placementObject") } });
+    Layouts.update(this._id, { $push: { objects: Session.get("designer.placementObject") } });
     console.log("object added:");
     console.log(Session.get("designer.placementObject"));
   },
@@ -95,7 +68,11 @@ Template.designerSurface.events({
 
 Template.layoutSettings.events({
   "click button.new": function () {
-    newLayout();
+    console.log("creating new layout");
+    Meteor.call("layout.insert", function (err, id) {
+      if (err) throw err;
+      Router.go("designer", { _id: id });
+    });
   }
 });
 
