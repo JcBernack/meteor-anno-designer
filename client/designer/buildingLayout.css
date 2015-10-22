@@ -1,12 +1,8 @@
-.designerSurface {
+.layout {
   width: 100%;
-  height: 400px;
+  height: 100%;
   border: 1px solid black;
   animation: fadein ease-out 0.8s;
-}
-
-.grid {
-  fill: url(#gridPattern);
 }
 
 .gridPattern {
@@ -21,20 +17,24 @@
   stroke-width: 0.025;
 }
 
-.layout {
+.layoutGroup {
   transition: transform ease-out 0.4s;
 }
 
 .building {
   stroke: black;
   vector-effect: non-scaling-stroke;
-  transition: transform ease-out 0.1s;
-  transform-origin: 50% 50%;
-  animation: grow ease-out 0.4s;
 }
 
-.building:hover {
+.building-hover {
+  transition: all ease-out 0.1s;
+  transform-origin: 50% 50%;
+}
+
+.building-hover:hover {
   transform: scale(1.08);
+  stroke: yellow;
+  stroke-width: 2px;
 }
 
 @keyframes fadein {
@@ -43,14 +43,5 @@
   }
   to {
     opacity: 1;
-  }
-}
-
-@keyframes grow {
-  from {
-    transform: scale(0.75);
-  }
-  to {
-    transform: scale(1);
   }
 }

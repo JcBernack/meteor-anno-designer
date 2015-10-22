@@ -45,24 +45,51 @@ Template.designerSurface.events({
     obj.x = x;
     obj.y = y;
     Session.set("designer.placementObject", obj);
-    //console.log("moved to (" + x + "," + y + ")");
+    // bring element to front
+    var element = $(".building-tmp");
+    element.parent().append(element);
+
   },
-  "click svg": function (event) {
+
+  "click svg": function () {
     if (Session.equals("designer.placementActive", false)) return;
     Layouts.update(this._id, { $push: { objects: Session.get("designer.placementObject") } });
     console.log("object added:");
     console.log(Session.get("designer.placementObject"));
   },
+
+  "dblclick .building": function (event) {
+    if (Session.equals("designer.placementActive", true)) return;
+    console.log("copy object:");
+    console.log(this);
+    Session.set("designer.placementObject", this);
+    Session.set("designer.placementActive", true);
+    return false;
+  },
+
+  "mousedown": function (event) {
+    // prevent selection of text when double clicking
+    event.preventDefault();
+  },
+
   "contextmenu svg": function (event) {
     if (Session.equals("designer.placementActive", false)) return;
     event.preventDefault();
     Session.set("designer.placementActive", false);
     console.log("placement stopped");
   },
+
   "mousewheel": function (event) {
+    event.preventDefault();
     //TODO: make sure this works in all browsers
     Session.set("designer.gridSize", Session.get("designer.gridSize") + event.originalEvent.wheelDelta / 120 * 2);
     console.log("grid size: " + Session.get("designer.gridSize"));
+  },
+
+  "mouseover .building": function (event) {
+    if (Session.equals("designer.placementActive", true)) return;
+    // bring element to front when hovered
+    event.currentTarget.parentNode.appendChild(event.currentTarget);
   }
 });
 
