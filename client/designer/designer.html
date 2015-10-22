@@ -16,13 +16,13 @@
       <pattern id="smallGridPattern" width="1" height="1" patternUnits="userSpaceOnUse">
         <path d="M 1 0 L 0 0 0 1" class="smallGridPattern"></path>
       </pattern>
-      <pattern id="gridPattern" width="{{gridFactor}}" height="{{gridFactor}}" patternTransform="scale({{gridSize}})" patternUnits="userSpaceOnUse">
+      <pattern id="gridPattern" width="{{gridFactor}}" height="{{gridFactor}}" patternUnits="userSpaceOnUse">
         <rect width="{{gridFactor}}" height="{{gridFactor}}" fill="url(#smallGridPattern)"></rect>
         <path d="M {{gridFactor}} 0 L 0 0 0 {{gridFactor}}" class="gridPattern"></path>
       </pattern>
     </defs>
-    <rect width="100%" height="100%" class="grid"></rect>
-    <g transform="scale({{gridSize}})">
+    <g class="layout" style="transform: scale({{gridSize}})">
+      <rect width="100%" height="100%" class="grid"></rect>
       {{#each layout.objects}}
         <rect x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" fill="{{color}}" class="building"></rect>
       {{/each}}

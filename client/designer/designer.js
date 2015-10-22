@@ -1,9 +1,9 @@
 Meteor.startup(function () {
   Session.setDefault("designer.gridSize", 20);
   Session.setDefault("designer.gridFactor", 2);
-  Session.setDefault("designer.placementActive", true);
+  Session.setDefault("designer.placementActive", false);
   Session.setDefault("designer.placementObject", {
-    x:0, y:0, width: 4, height: 4, color: "#ff0000"
+    width: 4, height: 4, color: "#ff0000"
   });
 });
 
@@ -85,6 +85,11 @@ Template.designerSurface.events({
     event.preventDefault();
     Session.set("designer.placementActive", false);
     console.log("placement stopped");
+  },
+  "mousewheel": function (event) {
+    //TODO: make sure this works in all browsers
+    Session.set("designer.gridSize", Session.get("designer.gridSize") + event.originalEvent.wheelDelta / 120 * 2);
+    console.log("grid size: " + Session.get("designer.gridSize"));
   }
 });
 
