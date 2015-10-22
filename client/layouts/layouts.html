@@ -1,3 +1,19 @@
 <template name="layouts">
-  Layouts
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Layouts</h3>
+    </div>
+    <div class="list-group">
+      {{#each layouts}}
+        <a href="{{pathFor route="designer.open"}}" class="list-group-item">
+          Created by: {{creator}}, Created at: {{formatDate createdAt}}, Number of buildings: {{objects.length}}
+          <span class="pull-right">
+            <button class="btn btn-xs btn-danger" title="Delete">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </span>
+        </a>
+      {{/each}}
+    </div>
+  </div>
 </template>
