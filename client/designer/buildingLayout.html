@@ -9,13 +9,15 @@
         <path d="M {{gridFactor}} 0 L 0 0 0 {{gridFactor}}" class="gridPattern"/>
       </pattern>
     </defs>
-    <g class="layoutGroup" style="transform: scale({{gridSize}});">
+    <g class="layoutScale" style="transform: scale({{gridSize}});" transform="scale({{gridSize}})">
       {{#unless gridDisabled}}
         <rect width="100%" height="100%" style="fill: url(#gridPattern{{id}});"/>
       {{/unless}}
-      {{#each layout.objects}}
-        <rect x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" fill="{{color}}" class="building {{hover}}"/>
-      {{/each}}
+      <g class="layoutObjects">
+        {{#each layout.objects}}
+          <rect x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" fill="{{color}}" class="building {{hover}}"/>
+        {{/each}}
+      </g>
       {{>UI.contentBlock}}
     </g>
   </svg>

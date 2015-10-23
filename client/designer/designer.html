@@ -15,7 +15,7 @@
     {{#buildingLayout layout=this gridSize=gridSize gridFactor=gridFactor hover=true}}
       {{#if placementActive}}
         {{#with placementObject}}
-          <rect x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" fill="{{color}}" class="building building-tmp"/>
+          <rect x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" fill="{{color}}" style="stroke: {{stroke}}" class="building building-tmp"/>
         {{/with}}
       {{/if}}
     {{/buildingLayout}}

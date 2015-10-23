@@ -7,6 +7,19 @@ Meteor.startup(function () {
   });
 });
 
+function checkCollisions(obj, template) {
+  var scale = Session.get("designer.gridSize");
+  var svg = template.find("svg");
+  var rect = svg.createSVGRect();
+  var margin = 0.5;
+  rect.x = (obj.x + margin) * scale;
+  rect.y = (obj.y + margin) * scale;
+  rect.width = (obj.width - 2 * margin) * scale;
+  rect.height = (obj.height - 2 * margin) * scale;
+  var collisions = svg.getIntersectionList(rect, template.find(".layoutObjects"));
+  return collisions.length;
+}
+
 Template.designerSurface.helpers({
   gridSize: function () {
     return Session.get("designer.gridSize");
@@ -19,43 +32,37 @@ Template.designerSurface.helpers({
   },
   placementObject: function () {
     return Session.get("designer.placementObject");
+  },
+  stroke: function () {
+    var collisions = checkCollisions(Session.get("designer.placementObject"), Template.instance());
+    return collisions > 0 ? "#ff0000" : "#00ff00";
   }
 });
 
 Template.designerSurface.events({
-  "mousemove svg": function (event) {
+  "mousemove svg": function (event, template) {
     // bail out if placement is not active
     if (Session.equals("designer.placementActive", false)) return;
-    var obj = Session.get("designer.placementObject");
+    // scale mouse position to grid coordinates and center the object on that position
     var scale = Session.get("designer.gridSize");
-    // calculate mouse position relative to svg element
-    //var parentOffset = $(event.delegateTarget).offset();
-    //var x = event.pageX - parentOffset.left;
-    //var y = event.pageY - parentOffset.top;
+    var obj = Session.get("designer.placementObject");
     //TODO: make sure this works in all browsers
-    var x = event.offsetX;
-    var y = event.offsetY;
-    // center object on mouse
-    x -= obj.width * scale / 2;
-    y -= obj.height * scale / 2;
-    // scale to grid coordinates
-    x = Math.round(x / scale);
-    y = Math.round(y / scale);
-    // move placement object to calculated position
-    obj.x = x;
-    obj.y = y;
+    obj.x = Math.round(event.offsetX / scale - obj.width / 2);
+    obj.y = Math.round(event.offsetY / scale - obj.height / 2);
     Session.set("designer.placementObject", obj);
-    // bring element to front
-    var element = $(".building-tmp");
-    element.parent().append(element);
-
   },
 
-  "click svg": function () {
+  "click svg": function (event, template) {
     if (Session.equals("designer.placementActive", false)) return;
-    Layouts.update(this._id, { $push: { objects: Session.get("designer.placementObject") } });
-    console.log("object added:");
-    console.log(Session.get("designer.placementObject"));
+    var obj = Session.get("designer.placementObject");
+    var collisions = checkCollisions(obj, template);
+    if (collisions) {
+      console.log("add object failed: " + collisions + " collisions detected");
+      return;
+    }
+    console.log("add object:");
+    console.log(obj);
+    Layouts.update(this.layout._id, { $push: { objects: obj } });
   },
 
   "dblclick .building": function (event) {
@@ -67,7 +74,7 @@ Template.designerSurface.events({
     return false;
   },
 
-  "mousedown": function (event) {
+  "mousedown .building": function (event) {
     // prevent selection of text when double clicking
     event.preventDefault();
   },
@@ -79,16 +86,25 @@ Template.designerSurface.events({
     console.log("placement stopped");
   },
 
+  "contextmenu .building": function (event) {
+    if (Session.equals("designer.placementActive", true)) return;
+    event.preventDefault();
+    console.log("remove object:");
+    console.log(this);
+    Layouts.update(Template.currentData()._id, { $pull: { objects: this } });
+  },
+
   "mousewheel": function (event) {
     event.preventDefault();
     //TODO: make sure this works in all browsers
-    Session.set("designer.gridSize", Session.get("designer.gridSize") + event.originalEvent.wheelDelta / 120 * 2);
-    console.log("grid size: " + Session.get("designer.gridSize"));
+    var scale = Session.get("designer.gridSize") + event.originalEvent.wheelDelta / 120 * 2;
+    if (scale < 6) scale = 6;
+    Session.set("designer.gridSize", scale);
+    console.log("grid size: " + scale);
   },
 
   "mouseover .building": function (event) {
     if (Session.equals("designer.placementActive", true)) return;
-    // bring element to front when hovered
     event.currentTarget.parentNode.appendChild(event.currentTarget);
   }
 });

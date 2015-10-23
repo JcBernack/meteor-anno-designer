@@ -17,24 +17,24 @@
   stroke-width: 0.025;
 }
 
-.layoutGroup {
+.layoutScale {
   transition: transform ease-out 0.4s;
 }
 
 .building {
   stroke: black;
-  vector-effect: non-scaling-stroke;
+  stroke-width: 0.1;
+  /*vector-effect: non-scaling-stroke;*/
 }
 
 .building-hover {
-  transition: all ease-out 0.1s;
-  transform-origin: 50% 50%;
+  /*transition: transform ease-out 0.1s;*/
+  /*transform-origin: 50% 50%;*/
 }
 
 .building-hover:hover {
-  transform: scale(1.08);
   stroke: yellow;
-  stroke-width: 2px;
+  stroke-width: 0.2;
 }
 
 @keyframes fadein {
