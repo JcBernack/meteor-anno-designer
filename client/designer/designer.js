@@ -62,7 +62,7 @@ Template.designerSurface.events({
     }
     console.log("add object:");
     console.log(obj);
-    Layouts.update(this.layout._id, { $push: { objects: obj } });
+    Meteor.call("layout.add", this.layout._id, obj);
   },
 
   "dblclick .building": function (event) {
@@ -91,7 +91,7 @@ Template.designerSurface.events({
     event.preventDefault();
     console.log("remove object:");
     console.log(this);
-    Layouts.update(Template.currentData()._id, { $pull: { objects: this } });
+    Meteor.call("layout.remove", Template.currentData()._id, this);
   },
 
   "mousewheel": function (event) {
@@ -106,6 +106,17 @@ Template.designerSurface.events({
   "mouseover .building": function (event) {
     if (Session.equals("designer.placementActive", true)) return;
     event.currentTarget.parentNode.appendChild(event.currentTarget);
+  }
+});
+
+Template.layoutSettings.helpers({
+  width: function () {
+    var bb = this.boundingBox;
+    return bb.right - bb.left;
+  },
+  height: function () {
+    var bb = this.boundingBox;
+    return bb.bottom - bb.top;
   }
 });
 
@@ -129,8 +140,8 @@ Template.buildingSettings.events({
   "submit form": function (event) {
     event.preventDefault();
     Session.set("designer.placementObject", {
-      width: event.target.width.value,
-      height: event.target.height.value,
+      width: Number.parseInt(event.target.width.value),
+      height: Number.parseInt(event.target.height.value),
       color: event.target.color.value
     });
     Session.set("designer.placementActive", true);

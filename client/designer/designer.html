@@ -28,10 +28,20 @@
       <h3 class="panel-title">Layout</h3>
     </div>
     <div class="panel-body">
-      <!--<div class="btn-group" role="group">-->
-        <button type="button" class="btn btn-default btn-block new">New layout</button>
-      <!--</div>-->
+      <dl>
+        <dt>Bounding box</dt>
+        <dd>{{width}} x {{height}}</dd>
+        <dt>Number of objects</dt>
+        <dd>{{objects.length}}</dd>
+        <dt>Creator</dt>
+        <dd>{{creator}}</dd>
+      </dl>
       <!--TODO: Stuff like layout name, category, etc. pp.-->
+    </div>
+    <div class="panel-footer">
+      <!--<div class="btn-group" role="group">-->
+      <!--</div>-->
+      <button type="button" class="btn btn-default btn-block new">New layout</button>
     </div>
   </div>
 </template>

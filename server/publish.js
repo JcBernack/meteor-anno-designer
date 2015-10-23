@@ -11,9 +11,6 @@ Meteor.publish("layout", function (id) {
 });
 
 Layouts.allow({
-  update: function () {
-    return true;
-  },
   remove: function () {
     return true;
   }
