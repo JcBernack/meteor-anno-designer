@@ -8,7 +8,7 @@
         <a href="{{pathFor route="layout.view"}}" class="list-group-item">
           <div class="row">
             <div class="col-sm-6 layout-list">
-              {{>buildingLayout layout=this}}
+              {{>buildingLayout layout=this autoSize=true}}
             </div>
             <div class="col-sm-6">
               {{#if equalsCurrentUser creator}}
