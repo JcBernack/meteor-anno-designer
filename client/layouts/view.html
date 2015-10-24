@@ -1,0 +1,66 @@
+<template name="layoutView">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Layout details</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-8 layout-view">
+          {{>buildingLayout layout=this}}
+        </div>
+        <div class="col-sm-4">
+          <dl>
+            <dt>Number of buildings</dt>
+            <dd>{{objects.length}}</dd>
+            <dt>Created at</dt>
+            <dd>{{formatDate createdAt}}</dd>
+            <dt>Created by</dt>
+            <dd>{{getUsername creator}}</dd>
+          </dl>
+          {{#if equalsCurrentUser creator}}
+            <a href="{{pathFor route="designer"}}" class="btn btn-primary" title="Edit">
+              <span class="glyphicon glyphicon-edit"></span> Edit in designer
+            </a>
+            <button type="button" class="btn btn-danger remove-layout" title="Delete">
+              <span class="glyphicon glyphicon-trash"></span> Delete
+            </button>
+          {{else}}
+            <p>TODO: Provide options for layouts created by other users. Maybe something like "copy and open in designer".</p>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class="list-group">
+      <div class="list-group-item">
+        <h3 class="list-group-item-heading">Comments</h3>
+        <p class="list-group-item-text">Number of comments: {{comments.count}}</p>
+      </div>
+      {{#each comments}}
+        <div class="list-group-item clearfix comment">
+          {{#if equalsCurrentUser creator}}
+            <div class="pull-right comment-right">
+              <button type="button" class="btn btn-danger remove-comment" title="Delete">
+                <span class="glyphicon glyphicon-trash"></span>
+                <span class="hidden-xs">Delete</span>
+              </button>
+            </div>
+          {{/if}}
+          <div class="pull-left text-right comment-left">
+            <h4>{{getUsername creator}}</h4>
+            <small>{{formatDate createdAt}}</small>
+          </div>
+          <pre class="comment">{{content}}</pre>
+        </div>
+      {{/each}}
+      <form class="list-group-item comment">
+        <h4 class="list-group-item-heading">Leave a comment</h4>
+        <div class="form-group">
+          <textarea name="comment" placeholder="New comment" rows="5" class="form-control comment"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <span class="glyphicon glyphicon-pencil"></span> Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</template>

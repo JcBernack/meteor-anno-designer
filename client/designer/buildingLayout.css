@@ -27,7 +27,8 @@
   /*vector-effect: non-scaling-stroke;*/
 }
 
-.building-hover {
+.building-hover, .building-tmp {
+  cursor: pointer;
   /*transition: transform ease-out 0.1s;*/
   /*transform-origin: 50% 50%;*/
 }

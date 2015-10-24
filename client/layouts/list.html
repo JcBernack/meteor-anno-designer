@@ -1,28 +1,31 @@
-<template name="layouts">
+<template name="layoutList">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Layouts</h3>
+      <h3 class="panel-title">Layout list</h3>
     </div>
     <div class="list-group">
       {{#each layouts}}
-        <a href="{{pathFor route="designer"}}" class="list-group-item">
+        <a href="{{pathFor route="layout.view"}}" class="list-group-item">
           <div class="row">
-            <div class="col-sm-6 layout-preview">
+            <div class="col-sm-6 layout-list">
               {{>buildingLayout layout=this}}
             </div>
             <div class="col-sm-6">
-              <span class="pull-right">
-                <button class="btn btn-xs btn-danger" title="Delete">
-                  <span class="glyphicon glyphicon-trash"></span>
-                </button>
-              </span>
+              {{#if equalsCurrentUser creator}}
+                <span class="pull-right">
+                  <button class="btn btn-danger remove" title="Delete">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Delete
+                  </button>
+                </span>
+              {{/if}}
               <dl>
                 <dt>Number of buildings</dt>
                 <dd>{{objects.length}}</dd>
                 <dt>Created at</dt>
                 <dd>{{formatDate createdAt}}</dd>
                 <dt>Created by</dt>
-                <dd>{{creator}}</dd>
+                <dd>{{getUsername creator}}</dd>
               </dl>
             </div>
           </div>

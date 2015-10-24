@@ -1,7 +1,7 @@
 <template name="designer">
   <div class="row">
     <div class="col-md-2">
-      {{>layoutSettings}}
+      {{>layoutDetails}}
       {{>buildingSettings}}
     </div>
     <div class="col-md-10">
@@ -11,7 +11,7 @@
 </template>
 
 <template name="designerSurface">
-  <div style="height: 400px;">
+  <div style="height: {{surfaceHeight}}px;">
     {{#buildingLayout layout=this gridSize=gridSize gridFactor=gridFactor hover=true}}
       {{#if placementActive}}
         {{#with placementObject}}
@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<template name="layoutSettings">
+<template name="layoutDetails">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Layout</h3>
@@ -34,7 +34,7 @@
         <dt>Number of objects</dt>
         <dd>{{objects.length}}</dd>
         <dt>Creator</dt>
-        <dd>{{creator}}</dd>
+        <dd>{{getUsername creator}}</dd>
       </dl>
       <!--TODO: Stuff like layout name, category, etc. pp.-->
     </div>

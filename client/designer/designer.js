@@ -21,6 +21,9 @@ function checkCollisions(obj, template) {
 }
 
 Template.designerSurface.helpers({
+  surfaceHeight: function () {
+    return 600;
+  },
   gridSize: function () {
     return Session.get("designer.gridSize");
   },
@@ -62,7 +65,7 @@ Template.designerSurface.events({
     }
     console.log("add object:");
     console.log(obj);
-    Meteor.call("layout.add", this.layout._id, obj);
+    Meteor.call("layout.objects.add", this.layout._id, obj);
   },
 
   "dblclick .building": function (event) {
@@ -91,7 +94,7 @@ Template.designerSurface.events({
     event.preventDefault();
     console.log("remove object:");
     console.log(this);
-    Meteor.call("layout.remove", Template.currentData()._id, this);
+    Meteor.call("layout.objects.remove", Template.currentData()._id, this);
   },
 
   "mousewheel": function (event) {
@@ -109,7 +112,7 @@ Template.designerSurface.events({
   }
 });
 
-Template.layoutSettings.helpers({
+Template.layoutDetails.helpers({
   width: function () {
     var bb = this.boundingBox;
     return bb.right - bb.left;
@@ -120,7 +123,7 @@ Template.layoutSettings.helpers({
   }
 });
 
-Template.layoutSettings.events({
+Template.layoutDetails.events({
   "click button.new": function () {
     console.log("creating new layout");
     Meteor.call("layout.insert", function (err, id) {

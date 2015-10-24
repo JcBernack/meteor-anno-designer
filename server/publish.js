@@ -3,15 +3,21 @@ Meteor.publish("layouts", function () {
 });
 
 Meteor.publish("layouts.user", function (userId) {
+  check(userId, String);
   return Layouts.find({ creator: userId });
 });
 
-Meteor.publish("layout", function (id) {
-  return Layouts.find(id);
+Meteor.publish("layout", function (layoutId) {
+  check(layoutId, String);
+  return Layouts.find(layoutId);
 });
 
-Layouts.allow({
-  remove: function () {
-    return true;
-  }
+Meteor.publish("layoutComments", function (layoutId) {
+  check(layoutId, String);
+  return LayoutComments.find({ layoutId: layoutId });
+});
+
+//TODO: add named publication and subscribe only when needed
+Meteor.publish(null, function () {
+  return Meteor.users.find({}, { username: 1 });
 });
