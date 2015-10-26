@@ -1,10 +1,4 @@
 Template.layoutOptions.events({
-  "click button.new": function () {
-    Meteor.call("layout.insert", function (err, id) {
-      if (err) throw err;
-      Router.go("designer", { _id: id });
-    });
-  },
   "click button.transform-cw": function () {
     Meteor.call("layout.transform", this._id, 1, false);
   },
@@ -16,6 +10,12 @@ Template.layoutOptions.events({
   },
   "click button.transform-flip-horizontal": function () {
     Meteor.call("layout.transform", this._id, 2, true);
+  },
+  "click button.new": function () {
+    Meteor.call("layout.insert", function (err, id) {
+      if (err) throw err;
+      Router.go("designer", { _id: id });
+    });
   }
 });
 
@@ -31,7 +31,8 @@ Template.buildingSettings.events({
     Session.set("designer.placementObject", {
       width: Number.parseInt(event.target.width.value),
       height: Number.parseInt(event.target.height.value),
-      color: event.target.color.value
+      color: event.target.color.value,
+      label: event.target.label.value
     });
     Session.set("designer.placementActive", true);
     console.log("placement started");

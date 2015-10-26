@@ -12,14 +12,16 @@
     {{#if gridEnabled}}
       <rect {{gridPosition}} width="100%" height="100%" fill="url(#gridPattern{{_id}})"/>
     {{/if}}
-    <g>
+    <g class="layout-object-hover">
       {{#each objects}}
-        <rect x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" fill="{{color}}" class="layout-object layout-object-hover"/>
+        {{>layoutObject}}
       {{/each}}
     </g>
     {{#if placementActive}}
       {{#with placementObject}}
-        <rect x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" fill="{{color}}" style="stroke: {{stroke}}" class="layout-object layout-object-tmp"/>
+        <g class="layout-object-tmp {{collision}}">
+          {{>layoutObject}}
+        </g>
       {{/with}}
     {{/if}}
   </svg>

@@ -14,20 +14,29 @@
   stroke-width: 0.025;
 }
 
-.layout-object {
+.layout-object rect {
   stroke: black;
   stroke-width: 0.1;
 }
 
-.layout-object-hover, .layout-object-tmp {
+.layout-object-hover svg, .layout-object-tmp svg {
   cursor: pointer;
 }
 
-.layout-object-hover {
-  transition: stroke ease-out 0.1s;
+.layout-object-hover rect, .layout-object-tmp rect {
+  transition: stroke ease-out 0.1s, opacity ease-out 0.1s;
 }
 
-.layout-object-hover:hover {
+.layout-object-hover svg:hover rect {
   stroke: yellow;
   stroke-width: 0.2;
+}
+
+.layout-object-tmp rect {
+  stroke: #00ff00;
+}
+
+.layout-object-collision rect {
+  stroke: #ff0000;
+  opacity: 0.5;
 }

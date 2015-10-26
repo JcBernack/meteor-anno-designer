@@ -41,8 +41,10 @@ Template.layoutDesigner.helpers({
   placementObject: function () {
     return Session.get("designer.placementObject");
   },
-  stroke: function () {
-    return checkCollisions(this, Template.instance().data.objects) ? "#ff0000" : "#00ff00";
+  collision: function () {
+    if (checkCollisions(this, Template.instance().data.objects)) {
+      return "layout-object-collision";
+    }
   },
   viewBox: function () {
     var viewBox = Session.get("designer.viewBox");
@@ -65,7 +67,7 @@ Template.layoutDesigner.helpers({
 });
 
 Template.layoutDesigner.events({
-  "mousemove svg": function (event, template) {
+  "mousemove .layout-render": function (event, template) {
     // bail out if placement is not active
     if (Session.equals("designer.placementActive", false)) return;
     // transform the mouse position to svg view-box coordinates
@@ -87,7 +89,7 @@ Template.layoutDesigner.events({
     }
   },
 
-  "click svg": function (event, template) {
+  "click .layout-render": function (event, template) {
     if (Session.equals("designer.placementActive", false)) return;
     var obj = Session.get("designer.placementObject");
     if (checkCollisions(obj, this.objects)) {
@@ -111,7 +113,7 @@ Template.layoutDesigner.events({
     event.preventDefault();
   },
 
-  "contextmenu svg": function (event) {
+  "contextmenu .layout-render": function (event) {
     if (Session.equals("designer.placementActive", false)) return;
     event.preventDefault();
     Session.set("designer.placementActive", false);
@@ -133,10 +135,5 @@ Template.layoutDesigner.events({
     viewBox.width += delta;
     viewBox.height += delta;
     Session.set("designer.viewBox", viewBox);
-  },
-
-  "mouseover .layout-object": function (event) {
-    if (Session.equals("designer.placementActive", true)) return;
-    event.currentTarget.parentNode.appendChild(event.currentTarget);
   }
 });

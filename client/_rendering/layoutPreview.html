@@ -13,7 +13,7 @@
       <rect {{gridPosition}} width="100%" height="100%" fill="url(#gridPattern{{_id}})"/>
     {{/if}}
     {{#each objects}}
-      <rect x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" fill="{{color}}" class="layout-object"/>
+      {{>layoutObject}}
     {{/each}}
   </svg>
 </template>
