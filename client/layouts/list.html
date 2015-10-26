@@ -7,10 +7,10 @@
       {{#each layouts}}
         <a href="{{pathFor route="layout.view"}}" class="list-group-item">
           <div class="row">
-            <div class="col-sm-6 layout-list">
-              {{>buildingLayout layout=this autoSize=true}}
+            <div class="col-sm-3 layout-list">
+              {{>layoutPreview}}
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-9">
               {{#if equalsCurrentUser creator}}
                 <span class="pull-right">
                   <button class="btn btn-danger remove" title="Delete">

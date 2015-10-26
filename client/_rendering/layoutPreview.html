@@ -1,0 +1,19 @@
+<template name="layoutPreview">
+  <svg class="layout-render" {{viewBox}}>
+    <defs>
+      <pattern id="smallGridPattern{{_id}}" width="1" height="1" patternUnits="userSpaceOnUse">
+        <path d="M 1 0 L 0 0 0 1" class="grid-pattern-small"/>
+      </pattern>
+      <pattern id="gridPattern{{_id}}" width="{{gridInterval}}" height="{{gridInterval}}" patternUnits="userSpaceOnUse">
+        <rect width="{{gridInterval}}" height="{{gridInterval}}" fill="url(#smallGridPattern{{_id}})"/>
+        <path d="M {{gridInterval}} 0 L 0 0 0 {{gridInterval}}" class="grid-pattern"/>
+      </pattern>
+    </defs>
+    {{#if gridEnabled}}
+      <rect {{gridPosition}} width="100%" height="100%" fill="url(#gridPattern{{_id}})"/>
+    {{/if}}
+    {{#each objects}}
+      <rect x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" fill="{{color}}" class="layout-object"/>
+    {{/each}}
+  </svg>
+</template>

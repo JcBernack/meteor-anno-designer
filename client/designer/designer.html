@@ -1,24 +1,30 @@
 <template name="designer">
   <div class="row">
     <div class="col-md-2">
-      {{>layoutDetails}}
+      {{>layoutOptions}}
       {{>buildingSettings}}
+      {{>layoutDetails}}
     </div>
     <div class="col-md-10">
-      {{>designerSurface}}
+      {{>layoutDesigner}}
     </div>
   </div>
 </template>
 
-<template name="designerSurface">
-  <div style="height: {{surfaceHeight}}px;">
-    {{#buildingLayout layout=this gridSize=gridSize gridFactor=gridFactor hover=true}}
-      {{#if placementActive}}
-        {{#with placementObject}}
-          <rect x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" fill="{{color}}" style="stroke: {{stroke}}" class="building building-tmp"/>
-        {{/with}}
-      {{/if}}
-    {{/buildingLayout}}
+<template name="layoutOptions">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Options</h3>
+    </div>
+    <div class="list-group">
+      <button type="button" class="list-group-item transform-cw">Rotate cw</button>
+      <button type="button" class="list-group-item transform-ccw">Rotate ccw</button>
+      <button type="button" class="list-group-item transform-flip-vertical">Flip vertical</button>
+      <button type="button" class="list-group-item transform-flip-horizontal">Flip horizontal</button>
+    </div>
+    <div class="panel-footer">
+      <button type="button" class="btn btn-default btn-block new">New layout</button>
+    </div>
   </div>
 </template>
 
@@ -37,11 +43,6 @@
         <dd>{{getUsername creator}}</dd>
       </dl>
       <!--TODO: Stuff like layout name, category, etc. pp.-->
-    </div>
-    <div class="panel-footer">
-      <!--<div class="btn-group" role="group">-->
-      <!--</div>-->
-      <button type="button" class="btn btn-default btn-block new">New layout</button>
     </div>
   </div>
 </template>
