@@ -3,12 +3,12 @@
     <rect width="100%" height="100%" fill="{{color}}"/>
     {{#if icon}}
       <image width="2" height="2" x="50%" y="50%" transform="translate(-1,-1)" xlink:href="/icons/{{icon}}"/>
-      {{#if label}}
+    {{/if}}
+    {{#if label}}
+      {{#if icon}}
         <text x="0.1" y="0.1" font-size="0.8" dominant-baseline="hanging">{{label}}</text>
-      {{/if}}
-    {{else}}
-      {{#if label}}
-        <text x="50%" y="50%" font-size="0.8" text-anchor="middle" dominant-baseline="middle">{{label}}</text>
+      {{else}}
+        <text x="50%" y="50%" font-size="0.8" dominant-baseline="middle" text-anchor="middle">{{label}}</text>
       {{/if}}
     {{/if}}
   </svg>
