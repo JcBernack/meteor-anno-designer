@@ -94,8 +94,6 @@ Template.layoutDesigner.events({
       console.log("add object failed: collision detected");
       return;
     }
-    console.log("add object:");
-    console.log(obj);
     Meteor.call("layout.objects.add", this._id, obj);
   },
 
@@ -123,18 +121,18 @@ Template.layoutDesigner.events({
   "contextmenu .layout-object": function (event, template) {
     if (Session.equals("designer.placementActive", true)) return;
     event.preventDefault();
-    console.log("remove object:");
-    console.log(this);
     Meteor.call("layout.objects.remove", template.data._id, this);
   },
 
   "mousewheel": function (event) {
     event.preventDefault();
     //TODO: make sure this works in all browsers
-    var scale = Session.get("designer.gridSize") + event.originalEvent.wheelDelta / 120 * 2;
-    if (scale < 6) scale = 6;
-    Session.set("designer.gridSize", scale);
-    console.log("grid size: " + scale);
+    var delta = event.originalEvent.wheelDelta / 120 * 2;
+    var viewBox = Session.get("designer.viewBox");
+    if (viewBox.width + delta < 16) return;
+    viewBox.width += delta;
+    viewBox.height += delta;
+    Session.set("designer.viewBox", viewBox);
   },
 
   "mouseover .layout-object": function (event) {
