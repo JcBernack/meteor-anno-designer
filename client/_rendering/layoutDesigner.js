@@ -129,7 +129,7 @@ Template.layoutDesigner.events({
   "mousewheel": function (event) {
     event.preventDefault();
     //TODO: make sure this works in all browsers
-    var delta = event.originalEvent.wheelDelta / 120 * 2;
+    var delta = event.originalEvent.wheelDelta / 120 * -2;
     var viewBox = Session.get("designer.viewBox");
     if (viewBox.width + delta < 16) return;
     viewBox.width += delta;
