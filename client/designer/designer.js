@@ -32,7 +32,8 @@ Template.buildingSettings.events({
       width: Number.parseInt(event.target.width.value),
       height: Number.parseInt(event.target.height.value),
       color: event.target.color.value,
-      label: event.target.label.value
+      label: event.target.label.value,
+      icon: event.target.icon.value
     });
     Session.set("designer.placementActive", true);
     console.log("placement started");
