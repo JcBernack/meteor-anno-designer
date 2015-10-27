@@ -5,3 +5,7 @@
 .flipped {
   transform: scaleX(-1);
 }
+
+a.thumbnail {
+  text-decoration: none;
+}

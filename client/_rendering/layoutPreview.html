@@ -1,5 +1,5 @@
 <template name="layoutPreview">
-  <svg class="layout-render" {{viewBox}}>
+  <svg class="layout-render" viewBox="{{viewBox.x}} {{viewBox.y}} {{viewBox.width}} {{viewBox.height}}">
     <defs>
       <pattern id="smallGridPattern{{_id}}" width="1" height="1" patternUnits="userSpaceOnUse">
         <path d="M 1 0 L 0 0 0 1" class="grid-pattern-small"/>
@@ -10,7 +10,7 @@
       </pattern>
     </defs>
     {{#if gridEnabled}}
-      <rect {{gridPosition}} width="100%" height="100%" fill="url(#gridPattern{{_id}})"/>
+      <rect x="{{viewBox.x}}" y="{{viewBox.y}}" width="100%" height="100%" fill="url(#gridPattern{{_id}})"/>
     {{/if}}
     {{#each objects}}
       {{>layoutObject}}

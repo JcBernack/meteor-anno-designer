@@ -1,5 +1,4 @@
 .layout-render {
-  border: 1px solid black;
   display: block;
 }
 
@@ -20,7 +19,7 @@
   stroke-width: 0.1;
 }
 
-.layout-object-hover svg, .layout-object-tmp svg {
+.layout-object-hover .layout-object, .layout-object-tmp .layout-object {
   cursor: pointer;
 }
 
@@ -30,7 +29,7 @@
   transition-timing-function: ease-out;
 }
 
-.layout-object-hover svg:hover rect {
+.layout-object-hover .layout-object:hover rect {
   stroke: yellow;
   stroke-width: 0.2;
 }
