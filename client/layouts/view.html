@@ -5,7 +5,7 @@
     </div>
     <div class="panel-body">
       <div class="row">
-        <div class="col-sm-8 layout-view">
+        <div class="col-sm-8">
           {{>layoutPreview}}
         </div>
         <div class="col-sm-4">
@@ -37,6 +37,10 @@
       </div>
       {{#each comments}}
         <div class="list-group-item clearfix comment">
+          <h4 class="list-group-item-heading">
+            {{getUsername creator}}
+            <small> at {{formatDate createdAt}}, {{formatTime createdAt}}</small>
+          </h4>
           {{#if equalsCurrentUser creator}}
             <div class="pull-right comment-right">
               <button type="button" class="btn btn-danger remove-comment" title="Delete">
@@ -45,15 +49,11 @@
               </button>
             </div>
           {{/if}}
-          <div class="pull-left text-right comment-left">
-            <h4>{{getUsername creator}}</h4>
-            <small>{{formatDate createdAt}}</small>
-          </div>
-          <pre class="comment">{{content}}</pre>
+          <pre class="list-group-item-text comment">{{content}}</pre>
         </div>
       {{/each}}
       <form class="list-group-item comment">
-        <h4 class="list-group-item-heading">Leave a comment</h4>
+        <h3 class="list-group-item-heading">Leave a comment</h3>
         <div class="form-group">
           <textarea name="comment" placeholder="New comment" rows="5" class="form-control comment"></textarea>
         </div>

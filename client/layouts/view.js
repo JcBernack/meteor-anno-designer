@@ -9,7 +9,7 @@ Template.layoutView.helpers({
 });
 
 Template.layoutView.events({
-  "click  button.remove-layout": function () {
+  "click button.remove-layout": function () {
     Meteor.call("layout.remove", this._id);
     Router.go("layout.list");
   },
