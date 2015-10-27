@@ -1,5 +1,6 @@
 .layout-render {
   border: 1px solid black;
+  display: block;
 }
 
 .grid-pattern {
@@ -24,7 +25,9 @@
 }
 
 .layout-object-hover rect, .layout-object-tmp rect {
-  transition: stroke ease-out 0.1s, opacity ease-out 0.1s;
+  transition-property: stroke, stroke-width, opacity;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
 }
 
 .layout-object-hover svg:hover rect {

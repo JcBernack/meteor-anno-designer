@@ -16,6 +16,14 @@ function checkCollisions(obj, objects) {
   return false;
 }
 
+function updateZoom(delta) {
+  var viewBox = Session.get("designer.viewBox");
+  if (viewBox.width + delta < 16) return;
+  viewBox.width += delta;
+  viewBox.height += delta;
+  Session.set("designer.viewBox", viewBox);
+}
+
 Template.layoutDesigner.onCreated(function () {
   var bb = this.data.boundingBox;
   Session.set("designer.viewBox", {
@@ -130,10 +138,33 @@ Template.layoutDesigner.events({
     event.preventDefault();
     //TODO: make sure this works in all browsers
     var delta = event.originalEvent.wheelDelta / 120 * -2;
-    var viewBox = Session.get("designer.viewBox");
-    if (viewBox.width + delta < 16) return;
-    viewBox.width += delta;
-    viewBox.height += delta;
-    Session.set("designer.viewBox", viewBox);
+    updateZoom(delta);
+  }
+});
+
+Template.layoutToolbar.events({
+  "click button.toolbar-new": function () {
+    Meteor.call("layout.insert", function (err, id) {
+      if (err) throw err;
+      Router.go("designer", { _id: id });
+    });
+  },
+  "click button.toolbar-zoom-in": function () {
+    updateZoom(-4);
+  },
+  "click button.toolbar-zoom-out": function () {
+    updateZoom(4);
+  },
+  "click button.toolbar-rotate-cw": function () {
+    Meteor.call("layout.transform", this._id, 1, false);
+  },
+  "click button.toolbar-rotate-ccw": function () {
+    Meteor.call("layout.transform", this._id, -1, false);
+  },
+  "click button.toolbar-flip-vertical": function () {
+    Meteor.call("layout.transform", this._id, 0, true);
+  },
+  "click button.toolbar-flip-horizontal": function () {
+    Meteor.call("layout.transform", this._id, 2, true);
   }
 });
