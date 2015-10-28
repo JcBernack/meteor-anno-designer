@@ -1,0 +1,23 @@
+<template name="taggedPicker">
+  <input type="text" name="{{name}}" class="tagged-picker-backing-field">
+  <div class="dropdown">
+    <button id="{{id}}" type="button" class="btn btn-default btn-block dropdown-toggle tagged-picker-toggle"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{>UI.dynamic template=elementTemplate data=selectedElement}}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <input type="text" class="tagged-picker-tags form-control" placeholder="filter, by, tags">
+      </li>
+      <li role="separator" class="divider"></li>
+      {{#each elements}}
+        <li class="{{active}}">
+          <a href="#" data-id="{{_id}}">
+            {{>UI.dynamic template=../elementTemplate}}
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</template>
