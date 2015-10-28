@@ -14,3 +14,13 @@ Template.registerHelper("getUsername", function(userId) {
 Template.registerHelper("equalsCurrentUser", function(userId) {
   return userId === Meteor.userId();
 });
+
+Template.registerHelper("fileSize", function(size) {
+  var units = ["B", "KB", "MB", "GB", "TB"];
+  var unit = 0;
+  while (size >= 1024){
+    size /= 1024;
+    unit++;
+  }
+  return Math.round(size).toString() + " " + units[unit];
+});

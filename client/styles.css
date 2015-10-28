@@ -9,3 +9,31 @@
 a.thumbnail {
   text-decoration: none;
 }
+
+/* Allow styling of an input[type=file] element by nesting it under a parent which acts as a "proxy"-element */
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hide the input field under the btn-file element */
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+/* Remove outline on buttons when used as a list-group-item, because it looks bad */
+button.list-group-item {
+  outline: none;
+}

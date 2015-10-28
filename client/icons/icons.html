@@ -1,0 +1,70 @@
+<template name="icons">
+  <div class="row">
+    <div class="col-md-8">
+      {{>iconList}}
+    </div>
+    <div class="col-md-4">
+      {{>iconUpload}}
+    </div>
+  </div>
+</template>
+
+<template name="iconList">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Icons</h3>
+    </div>
+    <div class="list-group">
+      {{#each icons}}
+        {{#if isUploaded}}
+          <li class="list-group-item">
+            <div class="pull-right">
+              <span class="badge">{{fileSize size}}</span>
+              {{>iconDelete}}
+            </div>
+            <img src="{{url}}">
+          </li>
+        {{/if}}
+      {{/each}}
+    </div>
+    <div class="panel-footer">
+      Number of icons: {{icons.count}}
+    </div>
+  </div>
+</template>
+
+<template name="iconUpload">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <span class="pull-right">Pending uploads: {{uploads.length}}</span>
+      <h3 class="panel-title">Icon upload</h3>
+    </div>
+    <div class="list-group">
+      {{#each uploads}}
+        <div class="list-group-item icon">
+          {{name}}
+          <div>
+            <span class="pull-right">
+              <span class="badge">{{fileSize size}}</span>
+              {{>iconDelete}}
+            </span>
+            {{>FS.UploadProgressBar bootstrap=true}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <form class="input-group">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-cloud-upload"></span></span>
+      <span class="form-control btn btn-block btn-default btn-file" title="Browse files">
+        Upload icons
+        <input type="file" multiple class="input-file" name="files">
+      </span>
+    </form>
+  </div>
+</template>
+
+<template name="iconDelete">
+  {{#FS.DeleteButton class="btn btn-xs btn-danger" title="Delete"}}
+    <span class="glyphicon glyphicon-trash"></span>
+  {{/FS.DeleteButton}}
+</template>
