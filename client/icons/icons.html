@@ -17,12 +17,17 @@
     <div class="list-group">
       {{#each icons}}
         {{#if isUploaded}}
-          <li class="list-group-item">
+          <li class="list-group-item clearfix">
             <div class="pull-right">
               <span class="badge">{{fileSize size}}</span>
               {{>iconDelete}}
             </div>
-            <img src="{{url}}">
+            <img src="{{url}}" class="pull-left">
+            <div>
+              {{#each tags}}
+                <span class="badge">{{this}}</span>
+              {{/each}}
+            </div>
           </li>
         {{/if}}
       {{/each}}

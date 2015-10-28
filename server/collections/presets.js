@@ -13,9 +13,3 @@ Presets.allow({
     return true;
   }
 });
-
-Icons.deny({
-  insert: function (file) {
-    return !Match.test(file.tags, [String]);
-  }
-});

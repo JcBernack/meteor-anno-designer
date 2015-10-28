@@ -19,7 +19,10 @@ Template.iconUpload.helpers({
 Template.iconUpload.events({
   "change .input-file": function (event) {
     FS.Utility.eachFile(event, function (file) {
-      Icons.insert(file, function (err, fileObj) {
+      var newFile = new FS.File(file);
+      //TODO: move to server
+      newFile.tags = ["untagged"];
+      Icons.insert(newFile, function (err, fileObj) {
         // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
         console.log("uploading file: " + fileObj._id);
       });
