@@ -63,6 +63,9 @@ AutoForm.hooks({
       }
       // prevent post back of form submit
       return false;
+    },
+    onError: function (formType, err) {
+      console.log(err);
     }
   }
 });
