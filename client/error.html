@@ -16,6 +16,10 @@
   </div>
 </template>
 
-<template name="notFound">
+<template name="errorNotFound">
   {{>error error="Error 404" message="Page not found" details="The page you requested does not exist."}}
+</template>
+
+<template name="errorForbidden">
+  {{>error error="Error 403" message="Forbidden" details="You should not be here."}}
 </template>

@@ -1,7 +1,3 @@
-Template.layoutView.onCreated(function () {
-  this.subscribe("layoutComments", this.data._id);
-});
-
 Template.layoutView.helpers({
   comments: function () {
     return LayoutComments.find({ layoutId: this._id }, { sort: { createdAt: 1 } });
