@@ -21,3 +21,19 @@ Meteor.publish("layoutComments", function (layoutId) {
 Meteor.publish(null, function () {
   return Meteor.users.find({}, { username: 1 });
 });
+
+Meteor.publish("presets", function () {
+  return Presets.find();
+});
+
+Presets.allow({
+  insert: function () {
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+  remove: function () {
+    return true;
+  }
+});

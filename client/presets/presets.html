@@ -1,0 +1,68 @@
+<template name="presets">
+  <div class="row">
+    <div class="col-md-8">
+      {{>presetList}}
+    </div>
+    <div class="col-md-4">
+      {{>presetEditor}}
+    </div>
+  </div>
+</template>
+
+<template name="presetList">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Presets</h3>
+    </div>
+    <div class="list-group">
+      {{#each presets}}
+        <button type="button" class="list-group-item preset {{active}}">
+          <div class="row">
+            <div class="col-xs-2 col-sm-1">{{icon}}</div>
+            <div class="col-xs-5 col-sm-4">{{name}}</div>
+            <div class="col-xs-3 col-sm-1">{{width}}x{{height}}</div>
+            <div class="col-xs-2 col-sm-1">{{influenceRadius}}</div>
+            <div class="col-xs-12 col-sm-5">
+              <button type="button" class="btn btn-xs btn-danger pull-right preset-remove" title="Delete">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+              {{#each tags}}
+                <div class="badge">{{this}}</div>
+              {{/each}}
+            </div>
+          </div>
+        </button>
+      {{/each}}
+    </div>
+    <div class="panel-footer">
+      Number of presets: {{presets.count}}
+    </div>
+  </div>
+</template>
+
+<template name="presetEditor">
+  {{#autoForm collection="Presets" id="presetForm" doc=selectedPreset}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Preset editor</h3>
+      </div>
+      <div class="panel-body">
+        {{>afQuickField name="name"}}
+        {{>afQuickField name="width"}}
+        {{>afQuickField name="height"}}
+        {{>afQuickField name="influenceRadius"}}
+        {{>afQuickField name="tags"}}
+      </div>
+      <div class="panel-footer">
+        <button type="button" class="btn btn-primary preset-insert">
+          <span class="glyphicon glyphicon-plus"></span>
+          Create
+        </button>
+        <button type="button" class="btn btn-success preset-update" {{saveDisabled}}>
+          <span class="glyphicon glyphicon-save"></span>
+          Update
+        </button>
+      </div>
+    </div>
+  {{/autoForm}}
+</template>
