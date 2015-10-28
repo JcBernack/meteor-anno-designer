@@ -25,7 +25,6 @@
         <dt>Creator</dt>
         <dd>{{getUsername creator}}</dd>
       </dl>
-      <!--TODO: Stuff like layout name, category, etc. pp.-->
     </div>
   </div>
 </template>
@@ -59,11 +58,19 @@
         </div>
         <div class="form-group">
           <label for="buildingIcon">Icon</label>
-          <input type="text" class="form-control input-sm" id="buildingIcon" name="icon"
-                 placeholder="Icon" value="{{get "icon"}}">
+          {{>taggedPicker id="buildingIcon" name="icon" collection="Icons"
+                          elementTemplate="pickerElementIcon" value=(get "icon")}}
         </div>
         <button type="submit" class="btn btn-default btn-block">Apply</button>
       </form>
     </div>
   </div>
+</template>
+
+<template name="pickerElementIcon">
+  {{#if this}}
+    <img src="{{url}}">
+  {{else}}
+    <span class="text-muted">Select icon</span>
+  {{/if}}
 </template>

@@ -1,3 +1,12 @@
+Template.buildingSettings.onCreated(function () {
+  // set initial building options
+  var defaultBuilding = { width: 4, height: 4, color: "#ff0000" };
+  var icon = Icons.findOne({ tags: { $all: ["warehouse"] } });
+  if (icon) defaultBuilding.icon = icon._id;
+  Session.setDefault("designer.placementObject", defaultBuilding);
+  Session.setDefault("designer.placementActive", false);
+});
+
 Template.buildingSettings.helpers({
   get: function (property) {
     return Session.get("designer.placementObject")[property];

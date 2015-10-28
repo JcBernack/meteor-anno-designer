@@ -1,10 +1,3 @@
-Meteor.startup(function () {
-  Session.setDefault("designer.placementActive", false);
-  Session.setDefault("designer.placementObject", {
-    width: 4, height: 4, color: "#ff0000"
-  });
-});
-
 function intersectsWith(a, b) {
   return !(b.x >= a.x + a.width || b.x + b.width <= a.x || b.y >= a.y + a.height || b.y + b.height <= a.y);
 }
@@ -25,6 +18,7 @@ function updateZoom(delta) {
 }
 
 Template.layoutDesigner.onCreated(function () {
+  // choose initial viewbox such that it fits the bounding box of the layout
   var bb = this.data.boundingBox;
   Session.set("designer.viewBox", {
     x: bb.left - 1,
@@ -132,14 +126,14 @@ Template.layoutDesigner.events({
     if (Session.equals("designer.placementActive", true)) return;
     event.preventDefault();
     Meteor.call("layout.objects.remove", template.data._id, this);
-  },
-
-  "mousewheel": function (event) {
-    event.preventDefault();
-    //TODO: make sure this works in all browsers
-    var delta = event.originalEvent.wheelDelta / 120 * -2;
-    updateZoom(delta);
   }
+
+  //"mousewheel": function (event) {
+  //  event.preventDefault();
+  //  //TODO: make sure this works in all browsers
+  //  var delta = event.originalEvent.wheelDelta / 120 * -2;
+  //  updateZoom(delta);
+  //}
 });
 
 Template.layoutToolbar.events({
