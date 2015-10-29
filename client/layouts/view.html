@@ -14,6 +14,8 @@
             <dd>{{objects.length}}</dd>
             <dt>Created at</dt>
             <dd>{{formatDate createdAt}}</dd>
+            <dt>Updated at</dt>
+            <dd>{{formatDate updatedAt "never"}}</dd>
             <dt>Created by</dt>
             <dd>{{getUsername creator}}</dd>
           </dl>
@@ -42,7 +44,7 @@
         <div class="list-group-item clearfix comment">
           <h4 class="list-group-item-heading">
             {{getUsername creator}}
-            <small> at {{formatDate createdAt}}, {{formatTime createdAt}}</small>
+            <small> at {{formatDateTime createdAt}}</small>
           </h4>
           {{#if allowDelete creator}}
             <div class="pull-right comment-right">
@@ -55,15 +57,17 @@
           <pre class="list-group-item-text comment">{{content}}</pre>
         </div>
       {{/each}}
-      <form class="list-group-item comment">
-        <h3 class="list-group-item-heading">Leave a comment</h3>
-        <div class="form-group">
-          <textarea name="comment" placeholder="New comment" rows="5" class="form-control comment"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">
-          <span class="glyphicon glyphicon-pencil"></span> Submit
-        </button>
-      </form>
+      {{#if currentUser}}
+        <form class="list-group-item comment">
+          <h3 class="list-group-item-heading">Leave a comment</h3>
+          <div class="form-group">
+            <textarea name="comment" placeholder="New comment" rows="5" class="form-control comment"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-pencil"></span> Submit
+          </button>
+        </form>
+      {{/if}}
     </div>
   </div>
 </template>

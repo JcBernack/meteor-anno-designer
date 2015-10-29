@@ -1,9 +1,13 @@
-Template.registerHelper("formatDate", function(date) {
-  return date && date.toLocaleDateString();
+Template.registerHelper("formatDate", function(date, alt) {
+  return !date ? alt : date.toLocaleDateString();
 });
 
-Template.registerHelper("formatTime", function(date) {
-  return date && date.toLocaleTimeString();
+Template.registerHelper("formatTime", function(date, alt) {
+  return !date ? alt : date.toLocaleTimeString();
+});
+
+Template.registerHelper("formatDateTime", function(date, alt) {
+  return !date ? alt : date.toLocaleDateString() + ", " + date.toLocaleTimeString();
 });
 
 Template.registerHelper("getUsername", function(userId) {
