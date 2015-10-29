@@ -18,7 +18,11 @@
       {{#each presets}}
         <button type="button" class="list-group-item preset {{active}}">
           <div class="row">
-            <div class="col-xs-2 col-sm-1">{{icon}}</div>
+            <div class="col-xs-2 col-sm-1">
+              {{#with FS.GetFile "icons" icon}}
+                <img src="{{url}}">
+              {{/with}}
+            </div>
             <div class="col-xs-5 col-sm-4">{{name}}</div>
             <div class="col-xs-3 col-sm-1">{{width}}x{{height}}</div>
             <div class="col-xs-2 col-sm-1">{{influenceRadius}}</div>
@@ -50,6 +54,7 @@
         {{>afQuickField name="name"}}
         {{>afQuickField name="width"}}
         {{>afQuickField name="height"}}
+        {{>afQuickField name="icon" collection="Icons" elementTemplate="pickerElementIcon"}}
         {{>afQuickField name="influenceRadius"}}
         {{>afQuickField name="tags"}}
       </div>
