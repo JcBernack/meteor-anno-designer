@@ -1,5 +1,5 @@
 // make sure all required roles are added in advance
-console.log("Adding user roles");
+console.log("adding user roles");
 Meteor.roles.remove({});
 Meteor.roles.insert({ name: "useradmin" });
 Meteor.roles.insert({ name: "presets" });
