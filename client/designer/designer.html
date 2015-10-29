@@ -35,42 +35,14 @@
       <h3 class="panel-title">Building</h3>
     </div>
     <div class="panel-body">
-      <form>
-        <div class="form-group">
-          <label for="buildingWidth">Width</label>
-          <input type="number" class="form-control input-sm" id="buildingWidth" name="width"
-                 placeholder="Width" min="1" max="25" value="{{get "width"}}">
-        </div>
-        <div class="form-group">
-          <label for="buildingHeight">Height</label>
-          <input type="number" class="form-control input-sm" id="buildingHeight" name="height"
-                 placeholder="Height" min="1" max="25" value="{{get "height"}}">
-        </div>
-        <div class="form-group">
-          <label for="buildingColor">Color</label>
-          <input type="color" class="form-control input-sm" id="buildingColor" name="color"
-                 placeholder="Color" value="{{get "color"}}">
-        </div>
-        <div class="form-group">
-          <label for="buildingLabel">Label</label>
-          <input type="text" class="form-control input-sm" id="buildingLabel" name="label"
-                 placeholder="Label" value="{{get "label"}}">
-        </div>
-        <div class="form-group">
-          <label for="buildingIcon">Icon</label>
-          {{>taggedPicker id="buildingIcon" name="icon" collection="Icons"
-                          elementTemplate="pickerElementIcon" value=(get "icon")}}
-        </div>
+      {{#autoForm id="buildingForm" schema=buildingSchema doc=placementObject}}
+        {{>afQuickField name="width"}}
+        {{>afQuickField name="height"}}
+        {{>afQuickField name="label"}}
+        {{>afQuickField name="color"}}
+        {{>afQuickField name="icon" collection="Icons" elementTemplate="pickerElementIcon"}}
         <button type="submit" class="btn btn-default btn-block">Apply</button>
-      </form>
+      {{/autoForm}}
     </div>
   </div>
-</template>
-
-<template name="pickerElementIcon">
-  {{#if this}}
-    <img src="{{url}}">
-  {{else}}
-    <span class="text-muted">Select icon</span>
-  {{/if}}
 </template>

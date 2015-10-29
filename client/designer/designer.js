@@ -8,23 +8,11 @@ Template.buildingSettings.onCreated(function () {
 });
 
 Template.buildingSettings.helpers({
-  get: function (property) {
-    return Session.get("designer.placementObject")[property];
-  }
-});
-
-Template.buildingSettings.events({
-  "submit form": function (event) {
-    event.preventDefault();
-    Session.set("designer.placementObject", {
-      width: Number.parseInt(event.target.width.value),
-      height: Number.parseInt(event.target.height.value),
-      color: event.target.color.value,
-      label: event.target.label.value,
-      icon: event.target.icon.value
-    });
-    Session.set("designer.placementActive", true);
-    console.log("placement started");
+  placementObject: function (property) {
+    return Session.get("designer.placementObject");
+  },
+  buildingSchema: function () {
+    return LayoutObjectSchema.pick(["width", "height", "label", "color", "icon"]);
   }
 });
 
@@ -36,5 +24,21 @@ Template.layoutDetails.helpers({
   height: function () {
     var bb = this.boundingBox;
     return bb.bottom - bb.top;
+  }
+});
+
+AutoForm.hooks({
+  buildingForm: {
+    onSubmit: function () {
+      Session.set("designer.placementObject", this.insertDoc);
+      Session.set("designer.placementActive", true);
+      console.log("placement started");
+      // prevent post back
+      this.done();
+      return false;
+    },
+    onError: function (formType, err) {
+      console.log(err);
+    }
   }
 });
