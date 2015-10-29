@@ -15,7 +15,9 @@
         <ul class="nav navbar-nav">
           <li class="{{isActiveRoute "home"}}">{{#linkTo route="home"}}Home{{/linkTo}}</li>
           <li class="{{isActiveRoute "layout.list"}}">{{#linkTo route="layout.list"}}Layouts{{/linkTo}}</li>
-          <li class="{{isActiveRoute "designer"}}">{{#linkTo route="designer.open"}}Designer{{/linkTo}}</li>
+          {{#if currentUser}}
+            <li class="{{isActiveRoute "designer"}}">{{#linkTo route="designer.open"}}Designer{{/linkTo}}</li>
+          {{/if}}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                aria-expanded="false">Contribute <span class="caret"></span></a>
