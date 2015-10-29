@@ -56,6 +56,10 @@
         <dl>
           <dt>Username</dt>
           <dd>{{username}}</dd>
+          <dt>Emails</dt>
+          {{#each emails}}
+            <dd>{{address}}</dd>
+          {{/each}}
         </dl>
       {{else}}
         <p>No user selected.</p>

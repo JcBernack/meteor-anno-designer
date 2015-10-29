@@ -3,15 +3,9 @@ Meteor.publish("icons", function () {
 });
 
 Icons.allow({
-  insert: function () {
-    return true;
-  },
-  update: function () {
-    return true;
-  },
-  remove: function () {
-    return true;
-  },
+  insert: allowInRole("icons"),
+  update: allowInRole("icons"),
+  remove: allowInRole("icons"),
   download: function () {
     return true;
   }

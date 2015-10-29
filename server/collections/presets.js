@@ -3,13 +3,7 @@ Meteor.publish("presets", function () {
 });
 
 Presets.allow({
-  insert: function () {
-    return true;
-  },
-  update: function () {
-    return true;
-  },
-  remove: function () {
-    return true;
-  }
+  insert: allowInRole("presets"),
+  update: allowInRole("presets"),
+  remove: allowInRole("presets")
 });

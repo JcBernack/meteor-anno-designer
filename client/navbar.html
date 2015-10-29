@@ -20,7 +20,13 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                aria-expanded="false">Contribute <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li class="dropdown-header">Database</li>
+              <li class="dropdown-header">Project pages</li>
+              <li><a href="https://github.com/JcBernack/meteor-anno-designer">Source at GitHub</a></li>
+              <li><a href="https://github.com/JcBernack/meteor-anno-designer/issues">Bug reports and other issues</a></li>
+              {{#if isInRole "useradmin,presets,icons"}}
+                <li class="divider" role="separator"></li>
+                <li class="dropdown-header">Database</li>
+              {{/if}}
               {{#if isInRole "useradmin"}}
                 <li class="{{isActiveRoute "users"}}">{{#linkTo route="users"}}Users{{/linkTo}}</li>
               {{/if}}
@@ -31,10 +37,6 @@
                 <li class="{{isActiveRoute "icons"}}">{{#linkTo route="icons"}}Icons{{/linkTo}}</li>
               {{/if}}
               <!--<li class="{{isActiveRoute "colorSchemes"}}">{{#linkTo route="colorSchemes"}}Color schemes{{/linkTo}}</li>-->
-              <li class="divider" role="separator"></li>
-              <li class="dropdown-header">Project pages</li>
-              <li><a href="https://github.com/JcBernack/meteor-anno-designer">Source at GitHub</a></li>
-              <li><a href="https://github.com/JcBernack/meteor-anno-designer/issues">Bug reports and other issues</a></li>
             </ul>
           </li>
         </ul>

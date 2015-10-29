@@ -1,4 +1,7 @@
 Template.layoutView.helpers({
+  allowDelete: function (userId) {
+    return Meteor.userId() === userId || Roles.userIsInRole(Meteor.userId(), "moderator");
+  },
   comments: function () {
     return LayoutComments.find({ layoutId: this._id }, { sort: { createdAt: 1 } });
   }

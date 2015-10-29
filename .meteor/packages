@@ -29,7 +29,6 @@ ian:accounts-ui-bootstrap-3
 raix:handlebar-helpers
 check
 aldeed:autoform
-msavin:mongol
 cfs:standard-packages
 cfs:gridfs
 cfs:ui

@@ -21,12 +21,15 @@
             <a href="{{pathFor route="designer"}}" class="btn btn-primary" title="Edit">
               <span class="glyphicon glyphicon-edit"></span> Edit in designer
             </a>
-            <button type="button" class="btn btn-danger remove-layout" title="Delete">
-              <span class="glyphicon glyphicon-trash"></span> Delete
-            </button>
           {{else}}
             <p>TODO: Provide options for layouts created by other users. Maybe something like "copy and open in designer".</p>
           {{/if}}
+          {{#if allowDelete creator}}
+            <button type="button" class="btn btn-danger remove-layout" title="Delete">
+              <span class="glyphicon glyphicon-trash"></span> Delete
+            </button>
+          {{/if}}
+
         </div>
       </div>
     </div>
@@ -41,7 +44,7 @@
             {{getUsername creator}}
             <small> at {{formatDate createdAt}}, {{formatTime createdAt}}</small>
           </h4>
-          {{#if equalsCurrentUser creator}}
+          {{#if allowDelete creator}}
             <div class="pull-right comment-right">
               <button type="button" class="btn btn-danger remove-comment" title="Delete">
                 <span class="glyphicon glyphicon-trash"></span>

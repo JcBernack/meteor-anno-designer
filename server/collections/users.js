@@ -15,5 +15,5 @@ publishForRole("userdata", "useradmin", function() {
 
 //TODO: add named publication and subscribe only when needed
 Meteor.publish(null, function () {
-  return Meteor.users.find({}, { username: 1 });
+  return Meteor.users.find({}, { fields: { username: 1 } });
 });
