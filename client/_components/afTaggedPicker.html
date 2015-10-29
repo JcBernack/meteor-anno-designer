@@ -1,5 +1,5 @@
-<template name="taggedPicker">
-  <input type="text" name="{{name}}" class="tagged-picker-backing-field">
+<template name="afTaggedPicker">
+  <input type="text" class="tagged-picker-backing-field" {{atts}} value="{{value}}">
   <div class="dropdown">
     <button id="{{id}}" type="button" class="btn btn-default btn-block dropdown-toggle tagged-picker-toggle"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -14,7 +14,7 @@
       {{#each elements}}
         <li class="{{active}}">
           <a href="#" data-id="{{_id}}">
-            {{>UI.dynamic template=../elementTemplate}}
+            {{>UI.dynamic template=elementTemplate}}
           </a>
         </li>
       {{/each}}
