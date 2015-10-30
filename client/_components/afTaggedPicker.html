@@ -1,7 +1,7 @@
 <template name="afTaggedPicker">
-  <input type="text" class="tagged-picker-backing-field" {{atts}} value="{{value}}">
+  <input type="text" class="tagged-picker-backing-field" {{filteredAtts}} value="{{value}}">
   <div class="dropdown tagged-picker">
-    <button id="{{id}}" type="button" class="btn btn-default btn-block dropdown-toggle"
+    <button id="{{atts.id}}" type="button" class="btn btn-default btn-block dropdown-toggle"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{>UI.dynamic template=elementTemplate data=selectedElement}}
       <span class="caret"></span>
@@ -18,6 +18,8 @@
           </a>
         </li>
       {{/each}}
+      <li role="separator" class="divider"></li>
+      <li class="tagged-picker-tags small text-muted">Showing {{elements.count}} of {{count true}} matches.</li>
     </ul>
   </div>
 </template>
