@@ -1,0 +1,14 @@
+.tag-input .form-control {
+  height: auto;
+  padding: 3px 6px;
+  line-height: 2;
+}
+
+.tag-input .label {
+  font-size: 100%;
+}
+
+.tag-input input {
+  width: 100px;
+  line-height: 1;
+}
