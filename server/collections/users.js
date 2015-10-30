@@ -13,7 +13,6 @@ publishForRole("userdata", "useradmin", function() {
   return Meteor.users.find({}, { fields: { username: 1, roles: 1, emails: 1 } });
 });
 
-//TODO: add named publication and subscribe only when needed
-Meteor.publish(null, function () {
+Meteor.publish("users", function () {
   return Meteor.users.find({}, { fields: { username: 1 } });
 });
