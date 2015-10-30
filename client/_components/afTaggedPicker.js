@@ -57,7 +57,8 @@ Template.afTaggedPicker.helpers({
   },
   active: function () {
     var template = Template.instance();
-    return template.selectedId.get() == this._id ? "active" : "";
+    var id = template.selectedId.get();
+    return !this._id && !id || id == this._id ? "active" : "";
   },
   elementTemplate: function () {
     var template = Template.instance();
@@ -76,7 +77,10 @@ Template.afTaggedPicker.events({
     });
     template.filter.set(tags);
   },
-  "click .dropdown-menu a": function (event, template) {
+  "click .tagged-picker-option a": function (event, template) {
     template.selectedId.set(this._id);
+  },
+  "click .tagged-picker-deselect a": function (event, template) {
+    template.selectedId.set("");
   }
 });

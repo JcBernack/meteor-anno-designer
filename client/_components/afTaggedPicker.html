@@ -11,8 +11,11 @@
         <input type="text" class="form-control" placeholder="filter, by, tags">
       </li>
       <li role="separator" class="divider"></li>
+      <li class="tagged-picker-deselect {{active}}">
+        <a href="#"><span class="glyphicon glyphicon-ban-circle"></span> None</a>
+      </li>
       {{#each elements}}
-        <li class="{{active}}">
+        <li class="tagged-picker-option {{active}}">
           <a href="#">
             {{>UI.dynamic template=elementTemplate}}
           </a>
