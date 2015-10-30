@@ -43,8 +43,9 @@
       {{#each comments}}
         <div class="list-group-item clearfix comment">
           <h4 class="list-group-item-heading">
+            <span class="glyphicon glyphicon-menu-right"></span>
             {{getUsername creator}}
-            <small> at {{formatDateTime createdAt}}</small>
+            <small>{{formatDateTime createdAt}}</small>
           </h4>
           {{#if allowDelete creator}}
             <div class="pull-right comment-right">
@@ -64,7 +65,7 @@
             <textarea name="comment" placeholder="New comment" rows="5" class="form-control comment"></textarea>
           </div>
           <button type="submit" class="btn btn-primary">
-            <span class="glyphicon glyphicon-pencil"></span> Submit
+            <span class="glyphicon glyphicon-comment"></span> Submit
           </button>
         </form>
       {{/if}}
