@@ -1,3 +1,15 @@
 .tagged-picker-backing-field {
   display: none;
 }
+
+/*.tagged-picker .dropdown-menu {*/
+  /*min-width: 200px;*/
+/*}*/
+
+.tagged-picker .divider {
+  margin: 5px 0;
+}
+
+li.tagged-picker-tags {
+  padding: 0 5px;
+}

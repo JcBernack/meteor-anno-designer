@@ -41,10 +41,13 @@ Template.layoutDesigner.helpers({
     return Session.get("designer.placementActive");
   },
   placementObject: function () {
-    return Session.get("designer.placementObject");
+    var obj = Session.get("designer.placementObject");
+    obj.x = Session.get("designer.x");
+    obj.y = Session.get("designer.y");
+    return obj;
   },
-  collision: function () {
-    if (checkCollisions(this, Template.instance().data.objects)) {
+  collision: function (obj) {
+    if (checkCollisions(obj, Template.instance().data.objects)) {
       return "layout-object-collision";
     }
   },
@@ -83,17 +86,18 @@ Template.layoutDesigner.events({
     pt.x = Math.round(pt.x - obj.width / 2);
     pt.y = Math.round(pt.y - obj.height / 2);
     // update only if anything changed to reduce the number of redraws
-    if (pt.x != obj.x || pt.y != obj.y) {
+    if (pt.x != Session.get("designer.x") || pt.y != Session.get("designer.y")) {
       //console.log("mousemove: " + pt.x + " " + pt.y);
-      obj.x = pt.x;
-      obj.y = pt.y;
-      Session.set("designer.placementObject", obj);
+      Session.set("designer.x", pt.x);
+      Session.set("designer.y", pt.y);
     }
   },
 
   "click .layout-render": function (event, template) {
     if (Session.equals("designer.placementActive", false)) return;
     var obj = Session.get("designer.placementObject");
+    obj.x = Session.get("designer.x");
+    obj.y = Session.get("designer.y");
     if (checkCollisions(obj, this.objects)) {
       console.log("add object failed: collision detected");
       return;
@@ -103,37 +107,31 @@ Template.layoutDesigner.events({
 
   "dblclick .layout-object": function (event) {
     if (Session.equals("designer.placementActive", true)) return;
+    var obj = _.clone(this);
+    delete obj.x;
+    delete obj.y;
     console.log("copy object:");
-    console.log(this);
-    Session.set("designer.placementObject", this);
+    console.log(obj);
+    Session.set("designer.placementObject", obj);
     Session.set("designer.placementActive", true);
-    return false;
   },
 
-  "mousedown .layout-object": function (event) {
-    // prevent selection of text when double clicking
+  "mousedown, contextmenu": function (event) {
+    // prevent selection of text when (double) clicking
+    // and suppress context menu
     event.preventDefault();
   },
 
-  "contextmenu .layout-render": function (event) {
+  "contextmenu .layout-render": function () {
     if (Session.equals("designer.placementActive", false)) return;
-    event.preventDefault();
     Session.set("designer.placementActive", false);
     console.log("placement stopped");
   },
 
   "contextmenu .layout-object": function (event, template) {
     if (Session.equals("designer.placementActive", true)) return;
-    event.preventDefault();
     Meteor.call("layout.objects.remove", template.data._id, this);
   }
-
-  //"mousewheel": function (event) {
-  //  event.preventDefault();
-  //  //TODO: make sure this works in all browsers
-  //  var delta = event.originalEvent.wheelDelta / 120 * -2;
-  //  updateZoom(delta);
-  //}
 });
 
 Template.layoutToolbar.events({

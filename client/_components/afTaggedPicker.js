@@ -17,7 +17,6 @@ Template.afTaggedPicker.onCreated(function () {
   this.autorun(function () {
     // update selectedId when the data context changes
     self.selectedId.set(Template.currentData().value);
-    //TODO: this causes way too many update because the x and y coordinates are part of the "placementObject", refactor
   });
 });
 
@@ -53,15 +52,15 @@ Template.afTaggedPicker.helpers({
 });
 
 Template.afTaggedPicker.events({
-  //"click .tagged-picker-toggle": function (event, template) {
+  //TODO: try to hook up an event from the dropdown directly: http://getbootstrap.com/javascript/#dropdowns
+  //"click .dropdown-toggle": function (event, template) {
   //  template.find(".tagged-picker-tags").focus();
   //},
-  "input .tagged-picker-tags": function (event, template) {
+  "input .tagged-picker-tags input": function (event, template) {
     template.filter.set(event.target.value.split(","));
   },
   "click .dropdown-menu a": function (event, template) {
-    var id = event.currentTarget.dataset.id;
-    template.selectedId.set(id);
-    console.log("selected element: " + id);
+    template.selectedId.set(this._id);
+    console.log("selected element: " + this._id);
   }
 });

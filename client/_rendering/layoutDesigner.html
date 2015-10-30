@@ -18,11 +18,9 @@
       {{/each}}
     </g>
     {{#if placementActive}}
-      {{#with placementObject}}
-        <g class="layout-object-tmp {{collision}}">
-          {{>layoutObject}}
-        </g>
-      {{/with}}
+      <g class="layout-object-tmp {{collision placementObject}}">
+        {{>layoutObject placementObject}}
+      </g>
     {{/if}}
   </svg>
 </template>
