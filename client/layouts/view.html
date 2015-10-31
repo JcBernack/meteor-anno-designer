@@ -18,6 +18,8 @@
             <dd>{{formatDate updatedAt "never"}}</dd>
             <dt>Created by</dt>
             <dd>{{getUsername creator}}</dd>
+            <dt>Tags</dt>
+            <dd>{{>tagInput tags=tags _id=_id enabled=(hasAccess creator)}}</dd>
           </dl>
           {{#if equalsCurrentUser creator}}
             <a href="{{pathFor route="designer"}}" class="btn btn-primary" title="Edit">
@@ -26,7 +28,7 @@
           {{else}}
             <p>TODO: Provide options for layouts created by other users. Maybe something like "copy and open in designer".</p>
           {{/if}}
-          {{#if allowDelete creator}}
+          {{#if hasAccess creator}}
             <button type="button" class="btn btn-danger remove-layout" title="Delete">
               <span class="glyphicon glyphicon-trash"></span> Delete
             </button>
@@ -47,7 +49,7 @@
             {{getUsername creator}}
             <small>{{formatDateTime createdAt}}</small>
           </h4>
-          {{#if allowDelete creator}}
+          {{#if hasAccess creator}}
             <div class="pull-right comment-right">
               <button type="button" class="btn btn-danger remove-comment" title="Delete">
                 <span class="glyphicon glyphicon-trash"></span>

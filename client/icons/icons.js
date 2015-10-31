@@ -5,13 +5,11 @@ Template.iconList.helpers({
 });
 
 Template.iconList.events({
-  "tag.added": function (event, template) {
-    console.log("add tag \"" + event.newTag + "\" to icon " + this._id);
-    Icons.update(this._id, { $push: { tags: event.newTag } });
+  "tag.added": function (event) {
+    Meteor.call("icon.tag.add", this._id, event.newTag);
   },
-  "tag.removed": function (event, template) {
-    console.log("remove tag \"" + event.removedTag + "\" from icon " + this._id);
-    Icons.update(this._id, { $pull: { tags: event.removedTag } });
+  "tag.removed": function (event) {
+    Meteor.call("icon.tag.remove", this._id, event.removedTag);
   }
 });
 

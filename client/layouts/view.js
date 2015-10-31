@@ -1,5 +1,5 @@
 Template.layoutView.helpers({
-  allowDelete: function (userId) {
+  hasAccess: function (userId) {
     return Meteor.userId() === userId || Roles.userIsInRole(Meteor.userId(), "moderator");
   },
   comments: function () {
@@ -21,5 +21,13 @@ Template.layoutView.events({
     event.preventDefault();
     Meteor.call("layout.comment.add", this._id, event.target.comment.value);
     event.target.comment.value = "";
+  },
+
+  "tag.added": function (event) {
+    Meteor.call("layout.tag.add", this._id, event.newTag);
+  },
+
+  "tag.removed": function (event) {
+    Meteor.call("layout.tag.remove", this._id, event.removedTag);
   }
 });

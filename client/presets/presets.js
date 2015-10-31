@@ -18,13 +18,11 @@ Template.presetList.events({
     // prevent click-through
     return false;
   },
-  "tag.added": function (event, template) {
-    console.log("add tag \"" + event.newTag + "\" to preset " + this._id);
-    Presets.update(this._id, { $push: { tags: event.newTag } });
+  "tag.added": function (event) {
+    Meteor.call("preset.tag.add", this._id, event.newTag);
   },
-  "tag.removed": function (event, template) {
-    console.log("remove tag \"" + event.removedTag + "\" from preset " + this._id);
-    Presets.update(this._id, { $pull: { tags: event.removedTag } });
+  "tag.removed": function (event) {
+    Meteor.call("preset.tag.remove", this._id, event.removedTag);
   }
 });
 

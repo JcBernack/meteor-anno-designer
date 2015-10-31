@@ -24,25 +24,32 @@
         <dd>{{objects.length}}</dd>
         <dt>Creator</dt>
         <dd>{{getUsername creator}}</dd>
+        <dt>Tags</dt>
+        <dd>{{>tagInput}}</dd>
       </dl>
+    </div>
+    <div class="panel-footer">
+      {{#linkTo route="layout.view" class="btn btn-default btn-block"}}Details{{/linkTo}}
     </div>
   </div>
 </template>
 
 <template name="buildingSettings">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Building</h3>
-    </div>
-    <div class="panel-body">
-      {{#autoForm id="buildingForm" schema=buildingSchema doc=placementObject}}
+  {{#autoForm id="buildingForm" schema=buildingSchema doc=placementObject}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Building</h3>
+      </div>
+      <div class="panel-body">
         {{>afQuickField name="width"}}
         {{>afQuickField name="height"}}
-        {{>afQuickField name="label"}}
+        {{>afQuickField name="icon" elementTemplate="taggedPickerIcon"}}
         {{>afQuickField name="color"}}
-        {{>afQuickField name="icon" collection="Icons" elementTemplate="pickerElementIcon"}}
+        {{>afQuickField name="label"}}
+      </div>
+      <div class="panel-footer">
         <button type="submit" class="btn btn-default btn-block">Apply</button>
-      {{/autoForm}}
+      </div>
     </div>
-  </div>
+  {{/autoForm}}
 </template>

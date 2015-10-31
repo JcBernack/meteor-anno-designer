@@ -8,7 +8,7 @@ Template.buildingSettings.onCreated(function () {
 });
 
 Template.buildingSettings.helpers({
-  placementObject: function (property) {
+  placementObject: function () {
     return Session.get("designer.placementObject");
   },
   buildingSchema: function () {
@@ -24,6 +24,15 @@ Template.layoutDetails.helpers({
   height: function () {
     var bb = this.boundingBox;
     return bb.bottom - bb.top;
+  }
+});
+
+Template.layoutDetails.events({
+  "tag.added": function (event) {
+    Meteor.call("layout.tag.add", this._id, event.newTag);
+  },
+  "tag.removed": function (event) {
+    Meteor.call("layout.tag.remove", this._id, event.removedTag);
   }
 });
 
