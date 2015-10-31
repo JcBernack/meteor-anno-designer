@@ -3,6 +3,8 @@
     {{#each tags}}
       <span class="label {{labelClass}}">{{this}}</span>
     {{/each}}
-    <input type="text" placeholder="enter tags">
+    {{#if enabled}}
+      <input type="text" placeholder="enter tags">
+    {{/if}}
   </div>
 </template>

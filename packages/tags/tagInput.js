@@ -6,6 +6,9 @@ Template.tagInput.helpers({
   labelClass: function () {
     var template = Template.instance();
     return template.invalid.get() === this.toString() ? "label-danger" : "label-default";
+  },
+  enabled: function () {
+    return this.enabled !== false;
   }
 });
 
@@ -13,7 +16,7 @@ Template.tagInput.events({
   "keydown input": function (event, template) {
     // enter or comma
     var tags = template.data.tags;
-    if (event.keyCode === 13 || event.keyCode === 188 && !event.shiftKey) {
+    if (event.which === 13 || event.which === 188 && !event.shiftKey) {
       // prevent a comma from actually being entered
       event.preventDefault();
       // get the trimmed input
@@ -38,7 +41,7 @@ Template.tagInput.events({
       $(event.currentTarget).trigger(tagAdded);
     }
     // backspace
-    if (event.keyCode === 8) {
+    if (event.which === 8) {
       // bail out if there is something left in the input
       //TODO: should check if the cursor is at the left-most position
       if (event.currentTarget.value.length > 0) return;
