@@ -1,9 +1,9 @@
 <template name="presets">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
       {{>presetList}}
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       {{>presetEditor}}
     </div>
   </div>
@@ -23,16 +23,14 @@
                 <img src="{{url}}">
               {{/with}}
             </div>
-            <div class="col-xs-5 col-sm-4">{{name}}</div>
+            <div class="col-xs-5 col-sm-2">{{name}}</div>
             <div class="col-xs-3 col-sm-1">{{width}}x{{height}}</div>
             <div class="col-xs-2 col-sm-1">{{influenceRadius}}</div>
-            <div class="col-xs-12 col-sm-5">
+            <div class="col-xs-12 col-sm-7">
               <button type="button" class="btn btn-xs btn-danger pull-right preset-remove" title="Delete">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
-              {{#each tags}}
-                <div class="badge">{{this}}</div>
-              {{/each}}
+              {{>tagInput}}
             </div>
           </div>
         </button>
@@ -56,7 +54,6 @@
         {{>afQuickField name="height"}}
         {{>afQuickField name="icon" elementTemplate="taggedPickerIcon"}}
         {{>afQuickField name="influenceRadius"}}
-        {{>afQuickField name="tags"}}
       </div>
       <div class="panel-footer">
         <button type="button" class="btn btn-primary preset-insert">

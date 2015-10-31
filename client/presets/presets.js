@@ -17,6 +17,14 @@ Template.presetList.events({
     console.log("removed preset: " + this._id);
     // prevent click-through
     return false;
+  },
+  "tag.added": function (event, template) {
+    console.log("add tag \"" + event.newTag + "\" to preset " + this._id);
+    Presets.update(this._id, { $push: { tags: event.newTag } });
+  },
+  "tag.removed": function (event, template) {
+    console.log("remove tag \"" + event.removedTag + "\" from preset " + this._id);
+    Presets.update(this._id, { $pull: { tags: event.removedTag } });
   }
 });
 

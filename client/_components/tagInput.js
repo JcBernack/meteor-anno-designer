@@ -5,7 +5,7 @@ Template.tagInput.onCreated(function () {
 Template.tagInput.helpers({
   labelClass: function () {
     var template = Template.instance();
-    return template.invalid.get() === this.toString() ? "label-danger" : "label-primary";
+    return template.invalid.get() === this.toString() ? "label-danger" : "label-default";
   }
 });
 

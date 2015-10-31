@@ -1,3 +1,7 @@
 .icon .progress {
   margin-bottom: 0;
 }
+
+.icon img {
+  margin-right: 15px;
+}

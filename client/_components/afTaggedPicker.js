@@ -58,7 +58,7 @@ Template.afTaggedPicker.helpers({
   active: function () {
     var template = Template.instance();
     var id = template.selectedId.get();
-    return !this._id && !id || id == this._id ? "active" : "";
+    return !this._id && !id || id === this._id ? "active" : "";
   },
   elementTemplate: function () {
     var template = Template.instance();
