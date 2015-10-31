@@ -6,13 +6,10 @@ AutoForm.addInputType("taggedPicker", {
 });
 
 Template.afTaggedPicker.onCreated(function () {
-  this.filter = new ReactiveVar([new RegExp()]);
+  var collection = this.data.atts.collection
+  this.collection = Match.test(collection, String) ? window[collection] : collection;
   this.selectedId = new ReactiveVar("");
-  if (Match.test(this.data.atts.collection, String)) {
-    this.collection = window[this.data.atts.collection];
-  } else {
-    this.collection = this.data.atts.collection;
-  }
+  this.filter = new ReactiveVar([new RegExp()]);
   var self = this;
   this.autorun(function () {
     // update selectedId when the data context changes
@@ -40,8 +37,7 @@ Template.afTaggedPicker.helpers({
   elements: function () {
     var template = Template.instance();
     var limit = !template.data.atts.limit ? {} : { limit: template.data.atts.limit };
-    var cursor = template.collection.find({ tags: { $all: template.filter.get() } }, limit);
-    return cursor;
+    return template.collection.find({ tags: { $all: template.filter.get() } }, limit);
   },
   count: function (matches) {
     var template = Template.instance();
@@ -67,19 +63,30 @@ Template.afTaggedPicker.helpers({
 });
 
 Template.afTaggedPicker.events({
-  //TODO: try to hook up an event from the dropdown directly: http://getbootstrap.com/javascript/#dropdowns
-  //"click .dropdown-toggle": function (event, template) {
-  //  template.find(".tagged-picker-tags").focus();
+  // focus the filter input when the dropdown is opened
+  "shown.bs.dropdown": function (event, template) {
+    template.find(".tagged-picker-tags input").focus();
+  },
+  // close dropdown when escape is pressed within the filter input
+  //"keydown .tagged-picker-tags input": function (event, template) {
+    // escape
+    //if (event.which == 27) {
+    //  console.log("close dropdown");
+    //  $(template.find(".tagged-picker .dropdown-menu")).hide();
+    //}
   //},
+  // update filter while typing
   "input .tagged-picker-tags input": function (event, template) {
     var tags = _.map(event.target.value.split(","), function (tag) {
       return new RegExp(tag.trim(), "i");
     });
     template.filter.set(tags);
   },
+  // select item
   "click .tagged-picker-option a": function (event, template) {
     template.selectedId.set(this._id);
   },
+  // select nothing
   "click .tagged-picker-deselect a": function (event, template) {
     template.selectedId.set("");
   }
