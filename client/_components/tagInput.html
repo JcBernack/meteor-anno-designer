@@ -1,0 +1,8 @@
+<template name="tagInput">
+  <div class="tag-input">
+    {{#each tags}}
+      <span class="label {{labelClass}}">{{this}}</span>
+    {{/each}}
+    <input type="text" placeholder="enter tags">
+  </div>
+</template>
