@@ -102,7 +102,7 @@ Template.layoutDesigner.events({
       console.log("add object failed: collision detected");
       return;
     }
-    Meteor.call("layout.objects.add", this._id, obj);
+    Meteor.call("layout.object.add", this._id, obj);
   },
 
   "dblclick .layout-object": function (event) {
@@ -130,7 +130,7 @@ Template.layoutDesigner.events({
 
   "contextmenu .layout-object": function (event, template) {
     if (Session.equals("designer.placementActive", true)) return;
-    Meteor.call("layout.objects.remove", template.data._id, this);
+    Meteor.call("layout.object.remove", template.data._id, this);
   }
 });
 

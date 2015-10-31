@@ -27,7 +27,7 @@ Template.userRow.events({
     Session.set("selectedUserId", this._id);
   },
   "click .user-role": function(event, template) {
-    Meteor.call("toggleUserRole", template.data._id, this.name);
+    Meteor.call("user.role.toggle", template.data._id, this.name);
     // prevent click-through
     return false;
   },
