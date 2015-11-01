@@ -1,5 +1,5 @@
 Package.describe({
-  name: "jcbernack:tags",
+  name: "jcbernack:tag-input",
   version: "0.0.5",
   // Brief, one-line summary of the package.
   summary: "Tag input control.",
@@ -17,9 +17,9 @@ Package.onUse(function(api) {
     "reactive-var",
     "underscore",
     "jquery"]);
-  api.addFiles("tagInput.css", "client");
-  api.addFiles("tagInput.html", "client");
-  api.addFiles("tagInput.js", "client");
+  api.addFiles("tag-input.css", "client");
+  api.addFiles("tag-input.html", "client");
+  api.addFiles("tag-input.js", "client");
 });
 
 //Package.onTest(function(api) {
