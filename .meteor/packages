@@ -34,3 +34,4 @@ cfs:gridfs
 cfs:ui
 reactive-var
 jcbernack:tag-input
+astronomerio:core
