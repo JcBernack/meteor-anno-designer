@@ -12,10 +12,10 @@ Template.iconList.events({
     Session.set("icons.selected", this._id);
     console.log("selected icon: " + this._id);
   },
-  "tag.added": function (event) {
+  "tag.add": function (event) {
     Meteor.call("icon.tag.add", this._id, event.newTag);
   },
-  "tag.removed": function (event) {
+  "tag.remove": function (event) {
     Meteor.call("icon.tag.remove", this._id, event.removedTag);
   }
 });
@@ -70,12 +70,12 @@ Template.iconUpload.helpers({
 });
 
 Template.iconUpload.events({
-  "tag.added": function (event, template) {
+  "tag.add": function (event, template) {
     var tags = template.tags.get();
     tags.push(event.newTag);
     template.tags.set(tags);
   },
-  "tag.removed": function (event, template) {
+  "tag.remove": function (event, template) {
     var tags = template.tags.get();
     var i = tags.indexOf(event.removedTag);
     if (i > -1) tags.splice(i, 1);

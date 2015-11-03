@@ -37,7 +37,7 @@ Template.tagInput.events({
       // clear input field
       event.currentTarget.value = "";
       // raise event
-      var tagAdded = $.Event("tag.added", { newTag: value });
+      var tagAdded = $.Event("tag.add", { newTag: value });
       $(event.currentTarget).trigger(tagAdded);
     }
     // backspace
@@ -54,7 +54,7 @@ Template.tagInput.events({
       // prevent the backspace press from immediately removing the last character
       event.preventDefault();
       // raise event
-      var tagRemoved = $.Event("tag.removed", { removedTag: removed });
+      var tagRemoved = $.Event("tag.remove", { removedTag: removed });
       $(event.currentTarget).trigger(tagRemoved);
     }
   }

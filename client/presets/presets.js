@@ -18,10 +18,10 @@ Template.presetList.events({
     // prevent click-through
     return false;
   },
-  "tag.added": function (event) {
+  "tag.add": function (event) {
     Meteor.call("preset.tag.add", this._id, event.newTag);
   },
-  "tag.removed": function (event) {
+  "tag.remove": function (event) {
     Meteor.call("preset.tag.remove", this._id, event.removedTag);
   }
 });

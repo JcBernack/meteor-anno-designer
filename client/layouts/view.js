@@ -23,11 +23,11 @@ Template.layoutView.events({
     event.target.comment.value = "";
   },
 
-  "tag.added": function (event) {
+  "tag.add": function (event) {
     Meteor.call("layout.tag.add", this._id, event.newTag);
   },
 
-  "tag.removed": function (event) {
+  "tag.remove": function (event) {
     Meteor.call("layout.tag.remove", this._id, event.removedTag);
   }
 });
