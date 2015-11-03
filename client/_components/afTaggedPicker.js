@@ -2,14 +2,47 @@ AutoForm.addInputType("taggedPicker", {
   template: "afTaggedPicker",
   valueOut: function () {
     return this.val();
+  },
+  contextAdjust: function (context) {
+    if (!context.atts.filterSelector) {
+      context.atts.filterSelector = { tags: "$all" };
+    }
+    if (!context.atts.placeholder) {
+      context.atts.placeholder = "filter, by, tags";
+    }
+    return context;
   }
 });
 
+function buildFilter(words, fields) {
+  // remove empty elements
+  words = _.filter(words, function (word) {
+    return word.trim();
+  });
+  // select all elements when no filter is active
+  if (words.length == 0) return {};
+  // convert inputs to regular expressions
+  var regexps = _.map(words, function (word) {
+    return new RegExp(word.trim(), "i");
+  });
+  // build selector objects
+  var filters = _.map(fields, function (value, key) {
+    var obj = {};
+    obj[key] = {};
+    obj[key][value] = regexps;
+    return obj;
+  });
+  // leave out the $or operator when there is just one filter
+  if (filters.length == 1) return filters[0];
+  // connect all filters with $or
+  return { $or: filters };
+}
+
 Template.afTaggedPicker.onCreated(function () {
-  var collection = this.data.atts.collection
+  var collection = this.data.atts.collection;
   this.collection = Match.test(collection, String) ? window[collection] : collection;
   this.selectedId = new ReactiveVar("");
-  this.filter = new ReactiveVar([new RegExp()]);
+  this.filter = new ReactiveVar(buildFilter([], this.data.atts.filterSelector));
   var self = this;
   this.autorun(function () {
     // update selectedId when the data context changes
@@ -31,18 +64,23 @@ Template.afTaggedPicker.helpers({
     delete atts.id;
     delete atts.collection;
     delete atts.limit;
+    delete atts.filterSelector;
+    delete atts.placeholder;
     delete atts.elementTemplate;
     return atts;
+  },
+  placeholder: function () {
+    return Template.instance().data.atts.placeholder;
   },
   elements: function () {
     var template = Template.instance();
     var limit = !template.data.atts.limit ? {} : { limit: template.data.atts.limit };
-    return template.collection.find({ tags: { $all: template.filter.get() } }, limit);
+    return template.collection.find(template.filter.get(), limit);
   },
   count: function (matches) {
     var template = Template.instance();
     if (matches) {
-      return template.collection.find({ tags: { $all: template.filter.get() } }).count();
+      return template.collection.find(template.filter.get()).count();
     } else {
       return template.collection.find().count();
     }
@@ -77,10 +115,7 @@ Template.afTaggedPicker.events({
   //},
   // update filter while typing
   "input .tagged-picker-tags input": function (event, template) {
-    var tags = _.map(event.target.value.split(","), function (tag) {
-      return new RegExp(tag.trim(), "i");
-    });
-    template.filter.set(tags);
+    template.filter.set(buildFilter(event.target.value.split(","), template.data.atts.filterSelector));
   },
   // select item
   "click .tagged-picker-option a": function (event, template) {

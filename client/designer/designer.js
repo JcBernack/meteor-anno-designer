@@ -13,6 +13,9 @@ Template.buildingSettings.helpers({
   },
   buildingSchema: function () {
     return LayoutObjectSchema.pick(["width", "height", "label", "color", "icon"]);
+  },
+  filterSelector: function () {
+    return { tags: "$all", displayName: "$in" };
   }
 });
 
