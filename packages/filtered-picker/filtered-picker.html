@@ -1,0 +1,30 @@
+<template name="filteredPicker">
+  <div class="dropdown filtered-picker">
+    <input type="text" class="filtered-picker-backing-field" name="{{name}}" value="{{value}}">
+    <button id="{{id}}" type="button" class="btn btn-default btn-block dropdown-toggle"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{>UI.dynamic template=elementTemplate data=selectedElement}}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li class="filtered-picker-tags">
+        <input type="text" class="form-control" placeholder="{{placeholder}}">
+      </li>
+      <li role="separator" class="divider divider-top"></li>
+      <li class="filtered-picker-deselect {{active}}">
+        <a href="#"><span class="glyphicon glyphicon-ban-circle"></span> {{noneLabel}}</a>
+      </li>
+      {{#each elements}}
+        <li class="filtered-picker-option {{active}}">
+          <a href="#">
+            {{>UI.dynamic template=../elementTemplate}}
+          </a>
+        </li>
+      {{/each}}
+      <li role="separator" class="divider divider-bottom"></li>
+      <li class="filtered-picker-note small text-muted">
+        Showing {{elements.count}} of {{count true}} matches.
+      </li>
+    </ul>
+  </div>
+</template>

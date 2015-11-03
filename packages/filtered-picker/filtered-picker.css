@@ -1,0 +1,32 @@
+.filtered-picker-backing-field {
+  display: none;
+}
+
+.filtered-picker {
+  display: inherit;
+}
+
+.filtered-picker .divider {
+  margin: 5px 0;
+}
+
+.filtered-picker .divider.divider-top {
+  margin-bottom: 0;
+}
+
+.filtered-picker .divider.divider-bottom {
+  margin-top: 0;
+}
+
+li.filtered-picker-tags {
+  padding: 0 5px;
+}
+
+.filtered-picker-note {
+  padding: 3px 20px;
+}
+
+.filtered-picker .filtered-picker-deselect a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

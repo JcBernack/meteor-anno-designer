@@ -35,3 +35,4 @@ cfs:ui
 reactive-var
 jcbernack:tag-input
 astronomerio:core
+jcbernack:filtered-picker
