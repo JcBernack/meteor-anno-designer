@@ -1,0 +1,11 @@
+<template name="taggedPickerPreset">
+  {{#if this}}
+    {{#with FS.GetFile "icons" iconId}}
+      <img src="{{url}}">
+    {{/with}}
+    {{name}}
+    <div class="badge">{{width}}x{{height}}</div>
+  {{else}}
+    <span class="text-muted">Select preset</span>
+  {{/if}}
+</template>

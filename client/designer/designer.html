@@ -1,11 +1,13 @@
 <template name="designer">
   <div class="row">
     <div class="col-md-2">
-      {{>buildingSettings}}
       {{>layoutDetails}}
     </div>
     <div class="col-md-10">
-      {{>layoutToolbar}}
+      <div class="well well-sm">
+        {{>layoutToolbar}}
+        {{>buildingSettings}}
+      </div>
       {{>layoutDesigner}}
     </div>
   </div>
@@ -35,21 +37,30 @@
 </template>
 
 <template name="buildingSettings">
-  {{#autoForm id="buildingForm" schema=buildingSchema doc=placementObject}}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Building</h3>
+  <form class="building-settings">
+    <div class="row">
+      <div class="col-sm-5">
+        {{>filteredPicker name="presetId" collection="Presets" filterSelector=presetFilter limit=10
+            elementTemplate="taggedPickerPreset" noneLabel="Adjust manually" placeholder="name or tags" value=get.presetId}}
+        {{#unless get.presetId}}
+          {{>filteredPicker name="iconId" collection="Icons" limit=5 filterSelector=iconFilter
+              elementTemplate="taggedPickerIcon" placeholder="name or tags" value=get.iconId}}
+        {{/unless}}
       </div>
-      <div class="panel-body">
-        {{>afQuickField name="width"}}
-        {{>afQuickField name="height"}}
-        {{>afQuickField name="icon" elementTemplate="taggedPickerIcon" filterSelector=filterSelector placeholder="name or tags"}}
-        {{>afQuickField name="color"}}
-        {{>afQuickField name="label"}}
+      <div class="col-sm-4">
+        <input type="color" class="form-control" name="color" placeholder="Color" value="{{get "color"}}">
+        <input type="text" class="form-control" name="label" placeholder="Label" value="{{get "label"}}">
+        {{#unless get.presetId}}
+          <input type="number" class="form-control" name="width" placeholder="Width" value="{{get "width"}}">
+          <input type="number" class="form-control" name="height" placeholder="Height" value="{{get "height"}}">
+        {{/unless}}
       </div>
-      <div class="panel-footer">
-        <button type="submit" class="btn btn-default btn-block">Apply</button>
+      <div class="col-sm-3">
+        <button type="submit" class="btn btn-default btn-block">
+          <span class="glyphicon glyphicon-pencil"></span>
+          Apply
+        </button>
       </div>
     </div>
-  {{/autoForm}}
+  </form>
 </template>

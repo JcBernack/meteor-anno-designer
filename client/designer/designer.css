@@ -1,0 +1,17 @@
+.building-settings div.row {
+  margin: 0;
+}
+
+.building-settings div.row > div {
+  padding: 0
+}
+
+.layout-toolbar .btn {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.building-settings .btn {
+  height: 68px;
+}

@@ -19,7 +19,7 @@
         <button type="button" class="list-group-item preset {{active}}">
           <div class="row">
             <div class="col-xs-2 col-sm-1">
-              {{#with FS.GetFile "icons" icon}}
+              {{#with FS.GetFile "icons" iconId}}
                 <img src="{{url}}">
               {{/with}}
             </div>
@@ -52,7 +52,7 @@
         {{>afQuickField name="name"}}
         {{>afQuickField name="width"}}
         {{>afQuickField name="height"}}
-        {{>afQuickField name="icon" elementTemplate="taggedPickerIcon"}}
+        {{>afQuickField name="iconId" elementTemplate="taggedPickerIcon"}}
         {{>afQuickField name="influenceRadius"}}
       </div>
       <div class="panel-footer">
