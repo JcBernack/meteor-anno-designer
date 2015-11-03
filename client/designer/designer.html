@@ -40,10 +40,10 @@
   <form class="building-settings">
     <div class="row">
       <div class="col-sm-5">
-        {{>filteredPicker name="presetId" collection="Presets" filterSelector=presetFilter limit=10
+        {{>filteredPicker name="presetId" collection="Presets" filterSelector=presetFilter limit=8
             elementTemplate="taggedPickerPreset" noneLabel="Adjust manually" placeholder="name or tags" value=get.presetId}}
         {{#unless get.presetId}}
-          {{>filteredPicker name="iconId" collection="Icons" limit=5 filterSelector=iconFilter
+          {{>filteredPicker name="iconId" collection="Icons" limit=8 filterSelector=iconFilter
               elementTemplate="taggedPickerIcon" placeholder="name or tags" value=get.iconId}}
         {{/unless}}
       </div>
