@@ -5,3 +5,7 @@
 .icon img {
   margin-right: 15px;
 }
+
+.icon .tag-input input {
+  color: black;
+}
