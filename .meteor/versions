@@ -66,6 +66,7 @@ iron:location@1.0.11
 iron:middleware-stack@1.0.11
 iron:router@1.0.12
 iron:url@1.0.11
+jcbernack:access@0.6.0
 jcbernack:filtered-picker@0.0.5
 jcbernack:tag-input@0.0.5
 jquery@1.11.4
