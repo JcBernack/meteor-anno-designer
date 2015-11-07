@@ -110,8 +110,7 @@ Template.layoutDesigner.events({
     var obj = _.clone(this);
     delete obj.x;
     delete obj.y;
-    console.log("copy object:");
-    console.log(obj);
+    console.log("copy object:", obj);
     Session.set("designer.placementObject", obj);
     Session.set("designer.placementActive", true);
   },
